@@ -1,0 +1,20 @@
+.podcast {
+  display: block;
+  border: 3px solid white;
+  padding: .75rem;
+  margin-bottom: 1rem;
+  position: relative;
+  background: url('https://cdn.glitch.global/2bd6014f-d675-41c0-8ff9-1e720ca01f2d/pvp.png?v=1746822790245');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  
+  p {
+    margin: .5rem 0 0;
+    padding: 0;
+    background-color: #f9f1d7;
+    padding: .3rem;
+    border: 1px solid #a0a864;
+    line-height: 1.25rem;
+  }
+}
