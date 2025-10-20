@@ -5,7 +5,8 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "deploy": "vite build && echo 'Build complete! Push to main branch to deploy.'"
   },
   "dependencies": {
     "react": "^18.2.0",
