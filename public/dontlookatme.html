@@ -16,8 +16,7 @@
     <script type="text/javascript">
         window.onload = function() {
           const params = new URLSearchParams(window.location.search);
-          window.cioanalytics.identify({
-            id: params.get("customer_id") ?? "",
+          window.cioanalytics.identify(params.get("customer_id") ?? "",{
             dog_branch: params.get("branch") ?? "-1",
             dog_choice: params.get("choice") ?? "A"
           });
