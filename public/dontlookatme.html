@@ -16,10 +16,10 @@
     <script type="text/javascript">
         window.onload = function() {
           const params = new URLSearchParams(window.location.search);
-          cioAnalaytics.identify({
+          window.cioanalytics.identify({
             id: params.get("customer_id") ?? "",
           });
-          cioAnalaytics.track("story_branch_update", {
+          window.cioanalytics.track("story_branch_update", {
             branch: params.get("branch") ?? "0",
             choice: params.get("choice") ?? "A"
           });
