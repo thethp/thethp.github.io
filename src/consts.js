@@ -256,9 +256,44 @@ export const playlists = {
       "Forget the Flowers - Wilco",
       "Spick And Span - Rikard From",
       "There Was a Man - Menahan Street Band",
-      "Superstar - Beach House"
+      "Superstar - Beach House",
     ]
   },
+  // june25: {
+  //   id: 'june25',
+  //   title: '6.25',
+  //   shareLink: 'https://www.tunemymusic.com/share/GhxaM8X3iq',
+  //   grid: [
+  //     '#3500ff', '#ca632c', '#bc302f', '#d7f5f4', '#b099b1', '#72603c',
+  //     '#fc8c47', '#71cbdc', '#71cbdc', '#839b63', '#ffefaf', '#ffefaf',
+  //     '#ff6e47', '#923225', '#f3f1ec', '#84997a', '#84997a', '#7a6780',
+  //     '#5b6f93', '#ffff55', '#3d4664', '#f5d1ac', '#c7b2a6', '#c9a8e3',
+  //     '#ec6b5b', '#ec6b5b', '#373c47', '#6681c9', '#1d8869', '#1d8869',
+  //     '#b0e2ff', '#484a33', '#fbcbd9', '#f27d77', '#8e9174', '#1d8869'
+  //   ],
+  //   tracklist: [
+  //     "Beep Boop Computers - The Bug Club",
+  //     "Lost Everything - Thy Slaughter",
+  //     "Stop Calling The Police On Me",
+  //     "Bad Girls - M.I.A.",
+  //     "Elderberry Wine - Wednesday",
+  //     "Don't Lick The Swingset - Carly Cosgrove",
+  //     "Send It Back - DON WEST",
+  //     "Lisière - Laurie Torres",
+  //     "October - Okonski",
+  //     "Right on Time - Brandi Carlile",
+  //     "Tokyo Rain - Loaded Honey",
+  //     "Sizzle - Fulton Lee",
+  //     "Ya Ya - Prism Bitch",
+  //     "Only - Little Simz, Lydia Kitto",
+  //     "DEAD - Sudan Archives",
+  //     "Toro - Remi Wolf",
+  //     "C*NT - Flyana Boss",
+  //     "Anthems For A Seventeen Year-Old Girl - Maggie Rogers, Sylvan Esso",
+  //     "Animal - May Erlewine, 10 Good Songs",
+  //     "Stay Down, Man - Dan Reeder",
+  //   ]
+  // }
 }
 
 export const podcasts = [
