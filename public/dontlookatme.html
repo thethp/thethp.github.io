@@ -20,7 +20,7 @@
           if(params.has("class")) {
             updatedParams.class = params.get("class");
           } else {
-            updatedParams[`dog_branch_${params.get("branch")}`] = params.get("choice") ?? "A"
+            updatedParams[`dog_branch_${params.get("branch")}`] = params.get("choice".toLowerCase()) ?? "a"
           }
           window.cioanalytics.identify(params.get("customer_id") ?? "",updatedParams);
           window.close();
