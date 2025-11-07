@@ -17,7 +17,7 @@
         window.onload = function() {
           const params = new URLSearchParams(window.location.search);
           const updatedParams = {};
-          if(params.get("class")) {
+          if(params.has("class")) {
             updatedParams.class = params.get("class");
           } else {
             updatedParams[`dog_branch_${params.get("branch")}`] = params.get("choice") ?? "A"
