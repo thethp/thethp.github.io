@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Tiller</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../src/styles/styles.css" />
+    <link rel="icon" href="https://cdn.glitch.global/2bd6014f-d675-41c0-8ff9-1e720ca01f2d/IMG_7366.ico?v=1744758424337" />
+    <script>
+      !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
+        analytics.load(
+          "df0eb986534d3db10b6e",
+        );
+        analytics.page();
+      }}();
+    </script>
+    <script type="text/javascript">
+        function onSubmit() {
+          const params = new URLSearchParams(window.location.search);
+          window.cioanalytics.identify(params.get("customer_id") ?? "",{
+            dog_garys_name: document.getElementById('GarysName').value
+          });
+        };
+    </script>
+  </head>
+  <body>
+    <div id="root">
+        What's Gary's real name?
+        <input type="text" id="GarysName" />
+        <button onClick="onSubmit()">Submit</button>
+        <footer><link href="http://tiller.dog"><img src="https://cdn.glitch.global/2bd6014f-d675-41c0-8ff9-1e720ca01f2d/IMG_7366.png?v=1744750728976"></a></footer>
+    </div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>
+
