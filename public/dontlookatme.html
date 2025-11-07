@@ -17,8 +17,7 @@
         window.onload = function() {
           const params = new URLSearchParams(window.location.search);
           window.cioanalytics.identify(params.get("customer_id") ?? "",{
-            dog_branch: params.get("branch") ?? "-1",
-            dog_choice: params.get("choice") ?? "A"
+            [`dog_branch_${params.get("branch")}`]: params.get("choice") ?? "A",
           });
           window.close();
         };
