@@ -16,9 +16,13 @@
     <script type="text/javascript">
         window.onload = function() {
           const params = new URLSearchParams(window.location.search);
-          window.cioanalytics.identify(params.get("customer_id") ?? "",{
-            [`dog_branch_${params.get("branch")}`]: params.get("choice") ?? "A",
-          });
+          const updatedParams = {};
+          if(params.get("class")) {
+            updatedParams.class = params.get("class");
+          } else {
+            updatedParams[`dog_branch_${params.get("branch")}`] = params.get("choice") ?? "A"
+          }
+          window.cioanalytics.identify(params.get("customer_id") ?? "",updatedParams);
           window.close();
         };
     </script>
