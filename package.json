@@ -4,9 +4,9 @@
   "description": "A simple React single page app, built with Vite and React.",
   "scripts": {
     "start": "vite",
-    "build": "vite build",
+    "build": "vite build && cp build/index.html build/404.html",
     "serve": "vite preview",
-    "deploy": "vite build && echo 'Build complete! Push to main branch to deploy.'"
+    "deploy": "vite build && cp build/index.html build/404.html && echo 'Build complete! Push to main branch to deploy.'"
   },
   "dependencies": {
     "react": "^18.2.0",
