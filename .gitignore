@@ -3,9 +3,11 @@ node_modules/
 .pnp
 .pnp.js
 
-# Production build
+# Production build (keep root assets/ and 404.html for GitHub Pages)
 build/
 dist/
+!assets/
+!404.html
 
 # Logs
 npm-debug.log*
