@@ -10,6 +10,7 @@ import { Router, Link, useLocation } from "wouter";
 * Each page content is presented inside the overall structure defined here
 * The router attaches the page components to their paths
 */
+// i love to force stuff
 
 // Import and apply CSS stylesheet
 import "./styles/styles.css";
