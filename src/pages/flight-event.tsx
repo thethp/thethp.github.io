@@ -20,15 +20,19 @@ function FlightEventPage() {
     return date.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
   }
 
-  useEffect(async () => {
-    const airlinesResponse = await fetch(
-      `https://airlabs.co/api/v9/airlines?api_key=${airLabsKey}`
-    );
+  useEffect(() => {
+    const fetchAirlines = async () => {
+      const airlinesResponse = await fetch(
+        `https://airlabs.co/api/v9/airlines?api_key=${airLabsKey}`
+      );
 
-    const {response: airlinesResponseJson} = await airlinesResponse.json();
-    console.log('THPX',airlinesResponseJson)
+      const {response: airlinesResponseJson} = await airlinesResponse.json();
+      console.log('THPX',airlinesResponseJson)
 
-    setAirlines([{}]);
+      setAirlines([{}]);
+    };
+    
+    fetchAirlines();
   }, []);
 
   const handleFlightSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
