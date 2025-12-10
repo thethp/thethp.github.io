@@ -22,7 +22,7 @@ import Seo from './components/seo.jsx';
 const pages = [ 
   {url: '/', name: 'home'}, 
   {url: '/playlists', name: 'playlists'},
-  {url: '/podcast', name: 'podcast'}
+  {url: '/podcast', name: 'podcast'},
   {url: '/flight-event', name: 'flight event'}
 ];
 
