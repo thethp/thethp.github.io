@@ -3,6 +3,7 @@ import { Switch, Route, Router } from "wouter";
 import HomePage from "../pages/home";
 import PlaylistsPage from "../pages/playlists";
 import PodcastsPage from "../pages/podcasts";
+import FlightEventPage from "../pages/flight-event";
 
 export default () => (
     <Switch>
@@ -12,5 +13,6 @@ export default () => (
       </Route>
       <Route path="/playlists" component={PlaylistsPage} />
       <Route path="/podcast" component={PodcastsPage} />
+      <Route path="/flight-event" component={FlightEventPage} />
     </Switch>
 );

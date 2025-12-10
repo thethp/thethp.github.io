@@ -23,6 +23,7 @@ const pages = [
   {url: '/', name: 'home'}, 
   {url: '/playlists', name: 'playlists'},
   {url: '/podcast', name: 'podcast'}
+  {url: '/flight-event', name: 'flight event'}
 ];
 
 // Home function that is reflected across the site
