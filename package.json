@@ -4,21 +4,22 @@
   "description": "A simple React single page app, built with Vite and React.",
   "scripts": {
     "start": "vite",
-    "build": "vite build && cp build/index.html build/404.html && rsync -av --exclude='node_modules' build/ . ",
+    "build": "vite build && cp build/index.html build/404.html",
     "serve": "vite preview",
     "deploy": "npm run build && echo 'Build complete! Push to main branch to deploy.'"
   },
   "dependencies": {
+    "@vitejs/plugin-react": "^4.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-spring": "^9.7.2",
-    "wouter": "^2.11.0",
     "react-helmet-async": "^1.3.0",
-    "@vitejs/plugin-react": "^4.0.3"
+    "react-spring": "^9.7.2",
+    "wouter": "^2.11.0"
   },
   "devDependencies": {
-    "vite": "^4.0.0",
-    "sass": "^1.8"
+    "sass": "^1.8",
+    "typescript": "^5.9.3",
+    "vite": "^4.0.0"
   },
   "browserslist": [
     ">0.2%",
