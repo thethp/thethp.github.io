@@ -23,8 +23,7 @@ import Seo from './components/seo.jsx';
 const pages = [ 
   {url: '/', name: 'home'}, 
   {url: '/playlists', name: 'playlists'},
-  {url: '/podcast', name: 'podcast'},
-  {url: '/flight-event', name: 'flight event'}
+  {url: '/podcast', name: 'podcast'}
 ];
 
 // Home function that is reflected across the site
