@@ -11,6 +11,20 @@
         input, select, textarea { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
         button { padding: 10px 20px; background: #4353ff; color: white; border: none; border-radius: 4px; cursor: pointer; }
     </style>
+    <script type="text/javascript">
+      (function() {
+        var t = document.createElement('script'),
+            s = document.getElementsByTagName('script')[0];
+        t.async = true;
+        t.id    = 'cio-forms-handler';
+        t.setAttribute('data-site-id', 'siteid');
+        t.setAttribute('data-base-url', 'http://localhost:9100');
+
+        t.src = 'https://staging.customerioforms.com/assets/forms.js';
+
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
 </head>
 <body>
     <h1>Test Custom Form</h1>
