@@ -26,8 +26,7 @@ export default function PlaylistModal({closeModal, playlistData}) {
         videoId: 'qxOkaU6RVz4',
         events: {
           onReady: (e) => {
-            e.target.loadPlaylist(playlistData.youtubePlaylist);
-            e.target.pauseVideo();
+            e.target.cuePlaylist(playlistData.youtubePlaylist);
           },
         },
       });
