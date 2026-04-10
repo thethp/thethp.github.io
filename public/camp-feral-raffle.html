@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Raffle Draw</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a24;
+      --surface-2: #24243a;
+      --border: #2e2e48;
+      --accent: #7c5cfc;
+      --accent-glow: #9b7fff;
+      --text: #e8e6f0;
+      --text-dim: #8887a0;
+      --green: #34d399;
+      --red: #f87171;
+      --gold: #fbbf24;
+    }
+
+    body {
+      font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .panel h2 {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    textarea {
+      width: 100%;
+      height: 160px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.85rem;
+      padding: 0.75rem;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    textarea:focus { border-color: var(--accent); }
+
+    textarea::placeholder { color: var(--text-dim); }
+
+    .input-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      align-items: center;
+    }
+
+    .input-row label {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    input[type="number"] {
+      width: 80px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.95rem;
+      padding: 0.5rem 0.75rem;
+      outline: none;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    input[type="number"]:focus { border-color: var(--accent); }
+
+    button {
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.25rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      flex: 1;
+    }
+
+    .btn-primary:hover { background: var(--accent-glow); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--red);
+      border: 1px solid var(--red);
+      padding: 0.4rem 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .btn-danger:hover { background: rgba(248, 113, 113, 0.1); }
+
+    .btn-raffle {
+      background: linear-gradient(135deg, var(--accent), #c054fc);
+      color: #fff;
+      font-size: 1.1rem;
+      padding: 0.85rem 2.5rem;
+      border-radius: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .btn-raffle:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(124, 92, 252, 0.35);
+    }
+
+    .btn-raffle:active { transform: translateY(0); }
+
+    .btn-raffle:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Batches list */
+    .batches { margin-top: 0; }
+
+    .batch-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0.75rem;
+      background: var(--bg);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      border: 1px solid var(--border);
+    }
+
+    .batch-info {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .batch-count {
+      color: var(--accent-glow);
+      font-weight: 700;
+    }
+
+    .batch-entries {
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .batch-emails {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      max-width: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+    }
+
+    .total-bar {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem;
+      background: var(--surface-2);
+      border-radius: 8px;
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+    }
+
+    /* Raffle section */
+    .raffle-section {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    /* Spinner display */
+    .spinner-wrapper {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      margin: 1.5rem auto;
+      max-width: 500px;
+      border-radius: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: none;
+    }
+
+    .spinner-wrapper.active { display: block; }
+
+    .spinner-track {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      transition: none;
+    }
+
+    .spinner-item {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border);
+      transition: none;
+    }
+
+    .spinner-pointer {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 46px;
+      transform: translateY(-50%);
+      border-top: 2px solid var(--accent);
+      border-bottom: 2px solid var(--accent);
+      background: rgba(124, 92, 252, 0.08);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .spinner-fade-top, .spinner-fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 60px;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .spinner-fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, var(--surface), transparent);
+    }
+
+    .spinner-fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, var(--surface), transparent);
+    }
+
+    /* Winner display */
+    .winner-display {
+      display: none;
+      margin-top: 1.5rem;
+    }
+
+    .winner-display.active { display: block; }
+
+    .winner-label {
+      font-size: 0.85rem;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .winner-email {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 30px rgba(124, 92, 252, 0.5);
+      animation: winner-pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes winner-pulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(124, 92, 252, 0.4); }
+      50% { text-shadow: 0 0 40px rgba(124, 92, 252, 0.8), 0 0 80px rgba(192, 84, 252, 0.3); }
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      opacity: 0;
+      animation: confetti-fall linear forwards;
+    }
+
+    @keyframes confetti-fall {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+    }
+
+    /* History */
+    .history-item {
+      padding: 0.5rem 0.75rem;
+      background: var(--bg);
+      border-radius: 8px;
+      margin-bottom: 0.4rem;
+      font-size: 0.8rem;
+      display: flex;
+      justify-content: space-between;
+      border: 1px solid var(--border);
+    }
+
+    .history-num {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+    }
+
+    .history-email {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    @media (max-width: 700px) {
+      .container { grid-template-columns: 1fr; }
+      .raffle-section { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Raffle Draw</h1>
+  <p class="subtitle">Add email batches with weighted entries, then draw a winner.</p>
+
+  <div class="container">
+    <!-- Input Panel -->
+    <div class="panel">
+      <h2>Add Entries</h2>
+      <textarea id="emailInput" placeholder="Enter emails, one per line&#10;e.g.&#10;alice@example.com&#10;bob@example.com&#10;charlie@example.com"></textarea>
+      <div class="input-row">
+        <label for="entryCount">Entries per person:</label>
+        <input type="number" id="entryCount" value="1" min="1" max="1000">
+        <button class="btn-primary" onclick="addBatch()">Add Batch</button>
+      </div>
+    </div>
+
+    <!-- Batches Panel -->
+    <div class="panel">
+      <h2>Entry Batches</h2>
+      <div id="batchList" class="batches">
+        <div class="empty-state">No batches added yet.</div>
+      </div>
+      <div id="totalBar" class="total-bar" style="display:none;">
+        <span id="totalPeople">0 people</span>
+        <span id="totalEntries">0 total entries</span>
+      </div>
+    </div>
+
+    <!-- Raffle Section -->
+    <div class="panel raffle-section">
+      <button class="btn-raffle" id="raffleBtn" onclick="runRaffle()" disabled>Draw Winner</button>
+
+      <div class="spinner-wrapper" id="spinnerWrapper">
+        <div class="spinner-fade-top"></div>
+        <div class="spinner-track" id="spinnerTrack"></div>
+        <div class="spinner-pointer"></div>
+        <div class="spinner-fade-bottom"></div>
+      </div>
+
+      <div class="winner-display" id="winnerDisplay">
+        <div class="winner-label">Winner</div>
+        <div class="winner-email" id="winnerEmail"></div>
+      </div>
+
+      <div id="historySection" style="margin-top:1.5rem; display:none;">
+        <h2 style="font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-dim); margin-bottom:0.75rem;">Draw History</h2>
+        <div id="historyList"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti-container" id="confetti"></div>
+
+  <script>
+    const batches = [];
+    const drawHistory = [];
+    let isRunning = false;
+
+    function addBatch() {
+      const raw = document.getElementById('emailInput').value.trim();
+      const entries = parseInt(document.getElementById('entryCount').value) || 1;
+
+      if (!raw) return;
+
+      const emails = raw
+        .split(/[\n,;]+/)
+        .map(e => e.trim().toLowerCase())
+        .filter(e => e.length > 0 && e.includes('@'));
+
+      if (emails.length === 0) {
+        alert('No valid emails found. Make sure each line has an email address.');
+        return;
+      }
+
+      batches.push({ emails, entries });
+      document.getElementById('emailInput').value = '';
+      document.getElementById('entryCount').value = '1';
+      renderBatches();
+    }
+
+    function removeBatch(index) {
+      batches.splice(index, 1);
+      renderBatches();
+    }
+
+    function renderBatches() {
+      const list = document.getElementById('batchList');
+      const totalBar = document.getElementById('totalBar');
+      const raffleBtn = document.getElementById('raffleBtn');
+
+      if (batches.length === 0) {
+        list.innerHTML = '<div class="empty-state">No batches added yet.</div>';
+        totalBar.style.display = 'none';
+        raffleBtn.disabled = true;
+        return;
+      }
+
+      let totalPeople = 0;
+      let totalEntries = 0;
+
+      list.innerHTML = batches.map((b, i) => {
+        totalPeople += b.emails.length;
+        totalEntries += b.emails.length * b.entries;
+        const preview = b.emails.slice(0, 3).join(', ') + (b.emails.length > 3 ? ', ...' : '');
+        return `
+          <div class="batch-item">
+            <div class="batch-info">
+              <span class="batch-count">${b.emails.length} people</span>
+              <span class="batch-entries">&times;${b.entries} entries</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="batch-emails" title="${b.emails.join(', ')}">${preview}</span>
+              <button class="btn-danger" onclick="removeBatch(${i})">&times;</button>
+            </div>
+          </div>`;
+      }).join('');
+
+      totalBar.style.display = 'flex';
+      document.getElementById('totalPeople').textContent = `${totalPeople} people`;
+      document.getElementById('totalEntries').textContent = `${totalEntries} total entries`;
+      raffleBtn.disabled = false;
+    }
+
+    function buildPool() {
+      const pool = [];
+      for (const batch of batches) {
+        for (const email of batch.emails) {
+          for (let i = 0; i < batch.entries; i++) {
+            pool.push(email);
+          }
+        }
+      }
+      // Fisher-Yates shuffle
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      return pool;
+    }
+
+    function getUniqueEmails() {
+      const set = new Set();
+      for (const batch of batches) {
+        for (const email of batch.emails) {
+          set.add(email);
+        }
+      }
+      return Array.from(set);
+    }
+
+    async function runRaffle() {
+      if (isRunning || batches.length === 0) return;
+      isRunning = true;
+
+      const raffleBtn = document.getElementById('raffleBtn');
+      const spinnerWrapper = document.getElementById('spinnerWrapper');
+      const spinnerTrack = document.getElementById('spinnerTrack');
+      const winnerDisplay = document.getElementById('winnerDisplay');
+
+      raffleBtn.disabled = true;
+      winnerDisplay.classList.remove('active');
+
+      // Build weighted pool and pick winner
+      const pool = buildPool();
+      const winner = pool[Math.floor(Math.random() * pool.length)];
+
+      // Build spinner display items — use unique emails shuffled
+      const uniqueEmails = getUniqueEmails();
+      const ITEM_HEIGHT = 44;
+      const VISIBLE_ITEMS = 5;
+      const CENTER = Math.floor(VISIBLE_ITEMS / 2);
+
+      // Create a long repeating shuffled list for the spin
+      let spinList = [];
+      const totalSpinItems = 80 + Math.floor(Math.random() * 30);
+      for (let i = 0; i < totalSpinItems; i++) {
+        spinList.push(uniqueEmails[Math.floor(Math.random() * uniqueEmails.length)]);
+      }
+      // Force winner at the landing position
+      spinList.push(winner);
+
+      // Pad a few items after winner so it doesn't end abruptly
+      for (let i = 0; i < CENTER; i++) {
+        spinList.push(uniqueEmails[Math.floor(Math.random() * uniqueEmails.length)]);
+      }
+
+      // Render spinner items
+      spinnerTrack.innerHTML = spinList.map(email =>
+        `<div class="spinner-item">${email}</div>`
+      ).join('');
+
+      // Position: start at top
+      spinnerWrapper.classList.add('active');
+      spinnerTrack.style.transition = 'none';
+      spinnerTrack.style.transform = `translateY(0px)`;
+
+      // Force reflow
+      spinnerTrack.offsetHeight;
+
+      // Animate: scroll to winner position
+      const winnerIndex = spinList.length - 1 - CENTER;
+      const targetY = -(winnerIndex * ITEM_HEIGHT) + (CENTER * ITEM_HEIGHT);
+
+      // Use a custom easing via JS for a slot-machine feel
+      const startY = 0;
+      const distance = targetY - startY;
+      const duration = 4000 + Math.random() * 1500;
+      const startTime = performance.now();
+
+      function easeOutExpo(t) {
+        return t === 1 ? 1 : 1 - Math.pow(2, -12 * t);
+      }
+
+      await new Promise(resolve => {
+        function animate(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = easeOutExpo(progress);
+          const currentY = startY + distance * eased;
+          spinnerTrack.style.transform = `translateY(${currentY}px)`;
+
+          // Highlight center item
+          const currentIndex = Math.round(-currentY / ITEM_HEIGHT) + CENTER;
+          const items = spinnerTrack.children;
+          for (let i = 0; i < items.length; i++) {
+            if (i === currentIndex) {
+              items[i].style.color = '#fff';
+              items[i].style.fontWeight = '700';
+              items[i].style.fontSize = '1.05rem';
+            } else {
+              items[i].style.color = '';
+              items[i].style.fontWeight = '';
+              items[i].style.fontSize = '';
+            }
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            resolve();
+          }
+        }
+        requestAnimationFrame(animate);
+      });
+
+      // Show winner
+      await sleep(400);
+      winnerDisplay.classList.add('active');
+      document.getElementById('winnerEmail').textContent = winner;
+      launchConfetti();
+
+      // Add to history
+      drawHistory.push(winner);
+      renderHistory();
+
+      await sleep(1500);
+      raffleBtn.disabled = false;
+      isRunning = false;
+    }
+
+    function renderHistory() {
+      const section = document.getElementById('historySection');
+      const list = document.getElementById('historyList');
+      section.style.display = 'block';
+      list.innerHTML = drawHistory.map((email, i) =>
+        `<div class="history-item">
+          <span class="history-num">#${i + 1}</span>
+          <span class="history-email">${email}</span>
+        </div>`
+      ).reverse().join('');
+    }
+
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      const colors = ['#7c5cfc', '#c054fc', '#fbbf24', '#34d399', '#f87171', '#60a5fa'];
+      const pieces = 80;
+
+      for (let i = 0; i < pieces; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.width = (6 + Math.random() * 8) + 'px';
+        piece.style.height = (6 + Math.random() * 8) + 'px';
+        piece.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+        piece.style.animationDuration = (2 + Math.random() * 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.8) + 's';
+        container.appendChild(piece);
+      }
+
+      setTimeout(() => { container.innerHTML = ''; }, 5000);
+    }
+
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+  </script>
+</body>
+</html>
