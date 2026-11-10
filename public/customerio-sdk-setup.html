@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Customer.io · SDK setup lab</title>
+  <style>
+    :root{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#25273a;background:#f7f8fa;line-height:1.5;font-size:15px;--accent:#08767c;--line:#dce1e7;--muted:#626879}
+    *{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}button,a,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent)}
+    header,main,footer{max-width:1080px;margin:auto;padding:28px 32px}header{display:flex;justify-content:space-between;gap:20px;align-items:center}header a{color:inherit;text-decoration:none;font-weight:650}.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:650}h1{font-size:34px;line-height:1.2;letter-spacing:-.035em;margin:10px 0 14px}h2{font-size:19px;margin:0 0 8px}h3{font-size:15px;margin:0 0 4px}p{margin:0 0 16px}.muted,small{color:var(--muted)}.lead{max-width:680px;font-size:17px}.badge{display:inline-block;border:1px solid var(--line);background:white;border-radius:99px;padding:4px 11px;font-size:12px;white-space:nowrap}.grid{display:grid;grid-template-columns:1.2fr 1fr;gap:20px;align-items:start}.panel{background:white;border:1px solid var(--line);border-radius:12px;padding:24px;margin:20px 0}.grid .panel{margin-top:0}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}.summary{display:flex;gap:24px;flex-wrap:wrap;padding:18px 22px;background:#edf5f5;border:1px solid #cce1e0;border-radius:10px;margin:24px 0}.summary div{min-width:130px}.summary dt{font-size:12px;color:var(--muted)}.summary dd{margin:3px 0 0;font-weight:600;overflow-wrap:anywhere}.field{margin:0 0 16px}label{display:block;font-weight:550;margin-bottom:6px}input,select,textarea{width:100%;padding:10px 12px;border:1px solid #b9c2ce;border-radius:6px;background:white;color:inherit}textarea{resize:vertical;font-family:ui-monospace,SFMono-Regular,monospace;font-size:13px}input[readonly]{background:#f7f8fa}.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}small{display:block;margin-top:5px;font-size:12px}button,.link-button{border:1px solid transparent;border-radius:6px;padding:10px 15px;font-weight:600;cursor:pointer;background:var(--accent);color:white;text-decoration:none;display:inline-block}button.secondary,.link-button{color:#30364b;background:white;border-color:#c7ced8}button:disabled{cursor:not-allowed;opacity:.5}.actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.status{border-left:3px solid var(--accent);background:#edf5f5;border-radius:4px;padding:12px 14px;margin:14px 0;font-size:14px}.status.error{border-color:#be343f;background:#fff0f1}.status:empty{display:none}details{margin:16px 0}summary{cursor:pointer;color:var(--accent);font-weight:550}details>div{padding-top:14px}.checklist{list-style:none;padding:0;margin:0}.checklist li{padding:13px 0;border-bottom:1px solid #edf0f3;display:flex;gap:12px}.checklist li:last-child{border:0}.check{flex:none;width:24px;height:24px;border:1px solid #bcc5d0;border-radius:50%;display:grid;place-items:center;font-size:12px;margin-top:2px}.check.done{background:#e0f3eb;border-color:#89bfa8;color:#176445}.checklist p{margin:3px 0 0;font-size:13px;color:var(--muted)}.scroll{overflow:auto}table{border-collapse:collapse;width:100%;font-size:13px}caption{text-align:left;color:var(--muted);padding-bottom:14px}th,td{text-align:left;padding:12px 8px;border-bottom:1px solid #e7eaf0;vertical-align:top}th{font-weight:600;color:var(--muted)}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f9;border:1px solid var(--line);padding:14px;border-radius:6px;font-size:12px;max-height:320px;overflow:auto}code{font-family:ui-monospace,SFMono-Regular,monospace}a{color:var(--accent)}[hidden]{display:none!important}footer{font-size:12px;color:var(--muted);padding-top:0;padding-bottom:40px}#run-id{font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px}.empty{padding:24px 0;color:var(--muted)}
+    @media(max-width:760px){header,main,footer{padding-left:18px;padding-right:18px}.grid{grid-template-columns:1fr}.panel{padding:20px}h1{font-size:28px}.pair{grid-template-columns:1fr}.summary{gap:14px}header{align-items:flex-start}}
+    @media(prefers-reduced-motion:no-preference){button{transition:background-color .12s ease}}
+  </style>
+</head>
+<body>
+  <header><a href="./">Customer.io / Research</a><span class="badge" id="mode-badge">Simulation · No data sent</span></header>
+  <main>
+    <div class="eyebrow">SDK setup lab</div>
+    <h1>From your website to your first event.</h1>
+    <p class="lead muted">Connect a browser source, identify a test person, and request a demo. Follow each step here, then verify the result in Customer.io.</p>
+    <dl class="summary" aria-label="Setup details">
+      <div><dt>Source</dt><dd>JavaScript website</dd></div>
+      <div><dt>Environment</dt><dd id="summary-environment">Simulation</dd></div>
+      <div><dt>Person</dt><dd id="summary-person">Not identified</dd></div>
+      <div><dt>Research run</dt><dd id="run-id"></dd></div>
+    </dl>
+    <div class="grid">
+      <div>
+        <section class="panel" aria-labelledby="connection-title">
+          <h2 id="connection-title">1. Connect your source</h2>
+          <p class="muted">Explore with simulated events, or use a browser source write key to exercise the real SDK.</p>
+          <form id="connection-form">
+            <div class="field"><label for="mode">Mode</label><select id="mode"><option value="simulation">Simulation</option><option value="live">Live SDK</option></select></div>
+            <div id="live-fields" hidden>
+              <div class="field"><label for="environment">Environment</label><select id="environment"><option value="standalone">Standalone · Test workspace</option><option value="us">Production · US</option><option value="eu">Production · EU</option></select><small>Match the environment that issued your source key.</small></div>
+              <div class="field"><label for="write-key">Browser source write key</label><input id="write-key" type="password" autocomplete="off" spellcheck="false" aria-describedby="key-help"><small id="key-help">Use a JavaScript source key. The key stays in this tab's memory and goes to the selected Customer.io endpoint. Never use a private server, App API, or service-account key.</small></div>
+              <div class="pair"><div class="field"><label for="workspace-id">Workspace ID</label><input id="workspace-id" inputmode="numeric" value="70624" pattern="[0-9]+"></div><div class="field"><label for="source-id">Source ID <span class="muted">(optional)</span></label><input id="source-id" inputmode="numeric" pattern="[0-9]*"><small>Used only to open the matching source activity page.</small></div></div>
+              <details><summary>Paste configuration</summary><div><label for="configuration">Configuration JSON</label><textarea id="configuration" rows="5" placeholder='{"writeKey":"pk_…","environment":"standalone","workspaceId":"70624","sourceId":"…"}'></textarea><small>Supported fields: writeKey, environment, workspaceId, sourceId.</small><button class="secondary" type="button" id="apply-config">Apply configuration</button><div id="config-status" class="status" role="status"></div></div></details>
+            </div>
+            <div id="connection-status" class="status" role="status" aria-live="polite"></div>
+            <button type="submit" id="connect">Start simulation</button>
+            <small id="restart-help" hidden>To change mode or connection, reload this page. The SDK initializes once per page load.</small>
+          </form>
+        </section>
+        <section class="panel" aria-labelledby="person-title">
+          <h2 id="person-title">2. Identify a test person</h2>
+          <p class="muted">A fresh identity keeps this run separate from earlier tests.</p>
+          <form id="person-form">
+            <div class="field"><label for="person-id">Person ID</label><input id="person-id" readonly></div>
+            <div class="pair"><div class="field"><label for="person-name">Name</label><input id="person-name" value="SDK Research" maxlength="80" required autocomplete="off"></div><div class="field"><label for="person-email">Test email</label><input id="person-email" type="email" required autocomplete="off"></div></div>
+            <button type="submit" id="identify" disabled>Identify person</button><small id="identify-help">Start the simulation or connect a source first.</small>
+            <div id="person-status" class="status" role="status"></div>
+          </form>
+        </section>
+        <section class="panel" aria-labelledby="demo-title">
+          <h2 id="demo-title">3. Request a demo</h2>
+          <p class="muted">This test action sends <code>Demo Requested</code> with the same person ID and research run.</p>
+          <div class="field"><label for="interest">What would you like to explore?</label><select id="interest"><option>Integration setup</option><option>Personalized onboarding</option><option>Product analytics</option></select></div>
+          <button id="request-demo" disabled>Request demo</button><small id="demo-help">Identify a test person first. This does not book a meeting or send an email.</small>
+          <div id="demo-status" class="status" role="status"></div>
+        </section>
+      </div>
+      <aside>
+        <section class="panel" aria-labelledby="progress-title">
+          <h2 id="progress-title">Your progress</h2>
+          <ul class="checklist">
+            <li><span class="check" id="page-check" aria-hidden="true">1</span><div><h3>Website activity</h3><p id="page-proof">Waiting for a page event.</p></div></li>
+            <li><span class="check" id="person-check" aria-hidden="true">2</span><div><h3>Person identified</h3><p id="person-proof">Waiting for identification.</p></div></li>
+            <li><span class="check" id="event-check" aria-hidden="true">3</span><div><h3>Demo requested</h3><p id="event-proof">Waiting for your test action.</p></div></li>
+            <li><span class="check" aria-hidden="true">4</span><div><h3>Received by Customer.io</h3><p id="delivery-proof">Simulation does not verify delivery.</p></div></li>
+          </ul>
+          <a id="verify-link" class="link-button" href="https://fly-standalone.customer.io/workspaces/70624/integrations/all/overview" target="_blank" rel="noopener noreferrer" hidden>Check source activity</a>
+          <small id="verify-help" hidden>Match this run's person ID, event name, and timestamp in the source. This page cannot read your workspace or verify downstream delivery.</small>
+        </section>
+        <section class="panel" aria-labelledby="preview-title">
+          <h2 id="preview-title">Event preview</h2>
+          <p class="muted">The most recent call from this page. The SDK adds browser context; recordedAt is the local preview time.</p>
+          <pre id="event-preview">Your first event will appear here.</pre>
+          <button class="secondary" id="new-run" disabled>Start new run</button>
+          <small>Creates a fresh test identity and clears this page's history.</small>
+        </section>
+      </aside>
+    </div>
+    <section class="panel" aria-labelledby="history-title">
+      <div class="panel-head"><h2 id="history-title">This run's events</h2><span class="badge" id="event-count">0 events</span></div>
+      <div class="scroll"><table><caption>Local call history. An SDK call completing does not prove server receipt.</caption><thead><tr><th scope="col">Time</th><th scope="col">Call</th><th scope="col">Result</th></tr></thead><tbody id="event-history"><tr id="empty-row"><td colspan="3" class="empty">Start a run to preview your first event.</td></tr></tbody></table></div>
+    </section>
+  </main>
+  <footer>Research test page · No database credentials or source keys are embedded. Settings and local history are not saved between reloads. Live SDK storage follows its normal browser behavior. <a href="https://docs.customer.io/integrations/data-in/connections/javascript/js-source/" target="_blank" rel="noopener noreferrer">SDK documentation</a></footer>
+  <script>
+    'use strict';
+    const SDK_TEMPLATE = "!function(){var i=\"${analyticsKey}\", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error(\"Snippet included twice.\");else{analytics.invoked=!0;analytics.methods=[\"trackSubmit\",\"trackClick\",\"trackLink\",\"trackForm\",\"pageview\",\"identify\",\"reset\",\"group\",\"track\",\"ready\",\"alias\",\"debug\",\"page\",\"once\",\"off\",\"on\",\"addSourceMiddleware\",\"addIntegrationMiddleware\",\"setAnonymousId\",\"addDestinationMiddleware\"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement(\"script\");t.type=\"text/javascript\";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src=\"${edgeUrl}/v1/analytics-js/snippet/\" + key + \"/analytics.min.js\";var n=document.getElementsByTagName(\"script\")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION=\"4.15.3\";\n    analytics.load(\n      \"${apiKey}\",\n      // Optional: enable anonymous in-app. See https://docs.customer.io/journeys/anonymous-in-app/#enable-anonymous-in-app-messaging.\n      // {\n      //   \"integrations\": {\n      //     \"Customer.io In-App Plugin\": {\n      //       anonymousInApp: true\n      //     }\n      //   }\n      // }\n    );\n    analytics.page();\n  }}();";
+    const ENDPOINTS = Object.freeze({standalone:'https://staging-c-cdp-edge.cio.host',us:'https://cdp.customer.io',eu:'https://cdp-eu.customer.io'});
+    const $ = id => document.getElementById(id);
+    let started = false, ready = false, identified = false, busy = false, count = 0, runId;
+    const simulation = () => $('mode').value === 'simulation';
+    function message(id, text, error = false) { $(id).textContent = text; $(id).classList.toggle('error', error); }
+    function mark(id, text) { $(id+'-check').textContent='✓'; $(id+'-check').classList.add('done'); $(id+'-proof').textContent=text; }
+    function freshIdentity() { runId='sdk-research-'+crypto.randomUUID(); $('run-id').textContent=runId.slice(-12); $('person-id').value=runId; $('person-email').value=runId+'@example.test'; }
+    function updateActions() { $('identify').disabled=!ready||busy; $('request-demo').disabled=!ready||!identified||busy; $('new-run').disabled=!ready||busy; $('identify-help').textContent=ready?'Uses the identity and traits shown above.':'Start the simulation or connect a source first.'; }
+    function record(payload) {
+      const time = new Date().toISOString();
+      const event = {...payload, recordedAt:time};
+      $('event-preview').textContent=JSON.stringify(event,null,2);
+      $('empty-row')?.remove(); const row=document.createElement('tr');
+      for (const value of [new Date(time).toLocaleTimeString([], {timeZoneName:'short'}),payload.event||payload.type,simulation()?'Simulated':'SDK call completed · Receipt unverified']) { const cell=document.createElement('td'); cell.textContent=value; row.append(cell); }
+      $('event-history').prepend(row); count++; $('event-count').textContent=count+' '+(count===1?'event':'events');
+      while($('event-history').children.length>30) $('event-history').lastElementChild.remove();
+    }
+    function verificationLink() {
+      const base=$('environment').value==='standalone'?'https://fly-standalone.customer.io':'https://fly.customer.io';
+      const workspace=$('workspace-id').value, source=$('source-id').value;
+      $('verify-link').href=base+'/workspaces/'+workspace+(source?'/pipelines/sources/'+source+'/data-in':'/integrations/all/overview');
+      $('verify-link').hidden=false; $('verify-help').hidden=false;
+    }
+    $('mode').addEventListener('change',()=>{ $('live-fields').hidden=simulation(); $('connect').textContent=simulation()?'Start simulation':'Connect source'; });
+    $('apply-config').addEventListener('click',()=>{
+      try {
+        const config=JSON.parse($('configuration').value);
+        if(!config||Array.isArray(config)||typeof config!=='object') throw Error('Enter a JSON object.');
+        const unknown=Object.keys(config).filter(k=>!['writeKey','environment','workspaceId','sourceId'].includes(k));
+        if(unknown.length) throw Error('Unrecognized fields: '+unknown.join(', ')+'. Use the supported field names below the editor.');
+        if(config.environment!==undefined&&!Object.hasOwn(ENDPOINTS,config.environment)) throw Error('Environment must be standalone, us, or eu.');
+        if(config.writeKey!==undefined&&(typeof config.writeKey!=='string'||!validKey(config.writeKey))) throw Error('Use a browser source write key, not a private server key.');
+        for(const k of ['workspaceId','sourceId']) if(config[k]!==undefined&&!/^\d+$/.test(String(config[k]))) throw Error(k+' must contain only digits.');
+        for(const [k,id] of [['writeKey','write-key'],['environment','environment'],['workspaceId','workspace-id'],['sourceId','source-id']]) if(config[k]!==undefined) $(id).value=String(config[k]);
+        $('configuration').value=''; message('config-status','Configuration applied. Review the fields, then connect.');
+      } catch(error) { message('config-status',error instanceof SyntaxError?'Enter valid JSON, including double quotes around field names.':error.message,true); }
+    });
+    function validKey(key) { return /^[A-Za-z0-9_-]{8,256}$/.test(key)&&!key.startsWith('sk_')&&!key.startsWith('sa_'); }
+    $('connection-form').addEventListener('submit',async event=>{
+      event.preventDefault(); if(started) return;
+      if(!simulation()&&(!validKey($('write-key').value.trim())||!/^\d+$/.test($('workspace-id').value)||($('source-id').value&&!/^\d+$/.test($('source-id').value)))) { message('connection-status','Enter a browser source key and numeric workspace/source IDs. Private server keys cannot be used here.',true); return; }
+      started=true; $('connect').disabled=true; $('mode').disabled=true;
+      for(const id of ['environment','write-key','workspace-id','source-id','configuration','apply-config']) $(id).disabled=true;
+      $('restart-help').hidden=false;
+      if(simulation()) { ready=true; record({type:'page',properties:{research_run_id:runId,page_name:'SDK setup lab'}}); mark('page','Simulated page event.'); message('connection-status','Simulation ready. No SDK is loaded and no events are sent.'); updateActions(); return; }
+      $('mode-badge').textContent='Live SDK · Receipt unverified'; $('summary-environment').textContent=$('environment').selectedOptions[0].textContent;
+      $('delivery-proof').textContent='Not verified. Check this run in source activity.'; verificationLink();
+      message('connection-status','Loading the browser SDK…');
+      try {
+        const key=$('write-key').value.trim(), endpoint=ENDPOINTS[$('environment').value];
+        const bootstrap=document.createElement('script');
+        bootstrap.textContent=SDK_TEMPLATE.replaceAll('${analyticsKey}','cioanalytics').replaceAll('${edgeUrl}',endpoint).replaceAll('${apiKey}',key);
+        document.head.append(bootstrap);
+        await new Promise((resolve,reject)=>{
+          const timer=setTimeout(()=>reject(Error('The SDK did not become ready within 20 seconds. Check the source key, environment, network, and any consent or script-blocking controls, then reload to retry.')),20000);
+          const loader=document.querySelector('script[data-global-customerio-analytics-key="cioanalytics"]');
+          if(loader) loader.addEventListener('error',()=>{clearTimeout(timer);reject(Error('The SDK script could not load. Check the environment and browser network errors, then reload to retry.'));},{once:true});
+          window.cioanalytics.ready(()=>{clearTimeout(timer);resolve();});
+        });
+        ready=true; record({type:'page'}); mark('page','SDK ready; initial page called. Receipt unverified.');
+        message('connection-status','Browser SDK ready. The initial page call is not yet verified in Customer.io.');
+      } catch(error) { message('connection-status',error.message,true); }
+      updateActions();
+    });
+    async function send(type,payload) {
+      if(!simulation()) {
+        const operation=type==='identify'?window.cioanalytics.identify(payload.userId,payload.traits):window.cioanalytics.track(payload.event,payload.properties);
+        let timer;
+        try { await Promise.race([operation,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('The SDK call has not completed yet. Check source activity before retrying; the event may still arrive.')),10000);})]); }
+        finally { clearTimeout(timer); }
+      }
+      record({type,...payload});
+    }
+    $('person-form').addEventListener('submit',async event=>{
+      event.preventDefault(); if(!ready||busy) return; busy=true; updateActions();
+      try { await send('identify',{userId:runId,traits:{name:$('person-name').value.trim(),email:$('person-email').value.trim(),research_run_id:runId,research_test:true}}); identified=true; $('summary-person').textContent=$('person-name').value.trim(); mark('person',simulation()?'Simulated identity.':'Identify call completed. Receipt unverified.'); message('person-status',simulation()?'Test person identified in this simulation.':'Identify call completed. Verify the test person in Customer.io.'); }
+      catch(error) { message('person-status',error.message,true); }
+      finally { busy=false; updateActions(); }
+    });
+    $('request-demo').addEventListener('click',async()=>{
+      if(!ready||!identified||busy) return; busy=true; updateActions();
+      try { await send('track',{userId:runId,event:'Demo Requested',properties:{interest:$('interest').value,research_run_id:runId,research_test:true}}); mark('event',simulation()?'Simulated Demo Requested event.':'Demo Requested call completed. Receipt unverified.'); message('demo-status',simulation()?'Demo request simulated. No meeting or email was created.':'Demo Requested call completed. Check source activity for this person and timestamp.'); }
+      catch(error) { message('demo-status',error.message,true); }
+      finally { busy=false; updateActions(); }
+    });
+    $('new-run').addEventListener('click',()=>{
+      if(!ready||busy) return;
+      if(!simulation()) window.cioanalytics.reset();
+      identified=false; count=0; freshIdentity(); $('summary-person').textContent='Not identified';
+      for(const id of ['page','person','event']) { $(id+'-check').textContent=String(['page','person','event'].indexOf(id)+1); $(id+'-check').classList.remove('done'); }
+      $('person-proof').textContent='Waiting for identification.'; $('event-proof').textContent='Waiting for your test action.';
+      $('event-history').replaceChildren(); message('person-status',''); message('demo-status','');
+      if(!simulation()) window.cioanalytics.page('SDK setup lab',{research_run_id:runId});
+      record({type:'page',properties:{research_run_id:runId,page_name:'SDK setup lab'}}); mark('page',simulation()?'Simulated page event.':'New-run page called. Receipt unverified.'); updateActions(); $('person-name').focus();
+    });
+    freshIdentity();
+  </script>
+</body>
+</html>
