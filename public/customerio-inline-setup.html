@@ -1,85 +1,2941 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Integration setup · Customer.io research</title>
-<style>
-:root{color-scheme:light;--ink:#262626;--muted:#666;--line:#e0e0e0;--surface:#fff;--subtle:#fafafa;--accent:#1e7b87;--accent-hover:#135e67;--positive:#23744e;--critical:#af2929;--ai-start:#ece7fe;--ai-end:#fde2d3;--radius:8px;--space:8px;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:14px;color:var(--ink);background:var(--surface)}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button,a,input,select,textarea{outline-offset:3px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent)}button{cursor:pointer;min-height:36px;padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink);font-weight:550}button:hover{background:#f5f5f5}button:disabled{cursor:default;opacity:.5}.primary{color:white;background:var(--accent);border-color:var(--accent)}.primary:hover{background:var(--accent-hover)}.quiet{border:0;background:transparent;color:var(--muted)}a{color:var(--accent);text-underline-offset:3px}p{line-height:1.6;margin:8px 0;color:var(--muted)}h1{font-size:28px;letter-spacing:-.6px;margin:0 0 8px;font-weight:650}h2{font-size:17px;margin:0;font-weight:620;letter-spacing:-.2px}h3{font-size:14px;margin:0 0 8px}small,.small{font-size:12px;line-height:1.5;color:var(--muted)}.researchbar{background:#f5f5f5;border-bottom:1px solid var(--line);padding:8px 24px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#474747}.researchbar a{color:#474747}.shell{display:grid;grid-template-columns:208px 1fr;min-height:calc(100vh - 41px)}aside{border-right:1px solid var(--line);background:#fafafa;padding:24px 16px;display:flex;flex-direction:column;gap:28px}.brand{font-weight:750;font-size:18px;letter-spacing:-.4px}.workspace{font-size:12px;margin-top:10px;color:var(--muted)}.nav{display:grid;gap:4px}.nav span{padding:9px 12px;color:var(--muted);border-radius:6px}.nav .selected{background:#ededed;color:#262626;font-weight:600}.navlabel{font-size:11px;letter-spacing:.4px;text-transform:uppercase;padding-left:12px;margin:20px 0 5px;color:var(--muted)}.asidefoot{margin-top:auto;line-height:1.6}.main{min-width:0;padding:24px 40px 56px}.breadcrumb{font-size:12px;color:var(--muted);margin-bottom:28px;display:flex;gap:8px}.pagehead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:24px}.pagehead p{margin-bottom:0}.actions{display:flex;gap:8px;flex-wrap:wrap}.content{max-width:1000px;margin:auto}.panel{border:1px solid var(--line);border-radius:var(--radius);background:white;margin-bottom:20px;overflow:hidden}.panelhead{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center}.section{padding:24px}.summary{padding:20px 24px;display:grid;gap:14px}.summaryempty{display:flex;gap:12px;align-items:center;min-height:70px}.roundicon{display:grid;place-items:center;background:#f5f5f5;border:1px solid var(--line);width:36px;height:36px;border-radius:8px;font-size:18px;flex:none}.summary dl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:0}.summary dt{color:var(--muted);font-size:12px;margin-bottom:5px}.summary dd{margin:0;font-weight:550;line-height:1.4;overflow-wrap:anywhere}.pill{font-size:11px;background:#f5f5f5;color:#474747;padding:4px 8px;border-radius:20px;white-space:nowrap;display:inline-block}.pill.positive{color:#175638;background:#edf7f0}.pill.purple{color:#6b4ab4;background:#f2edfe}.agent{border:1px solid var(--line);border-radius:8px;margin-bottom:24px;overflow:hidden}.agenttop{background:radial-gradient(112.04% 137.09% at 0% 14.29%,color-mix(in srgb,var(--ai-start) 30%,white),color-mix(in srgb,var(--ai-end) 30%,white));padding:20px 24px}.agentlabel button{margin-left:auto;font-size:12px;min-height:28px;padding:2px 8px}.agentlabel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;color:#68606b;font-weight:600}.spark{color:#8d62ce;font-size:18px}.agentmessage{line-height:1.65;max-width:780px;margin:0;color:var(--ink)}.thread{max-height:220px;overflow:auto;overscroll-behavior:contain}.message{font-size:13px;line-height:1.6;padding:12px 24px;border-top:1px solid #eae6ee}.message.you{background:#fff}.message.theagent{background:#faf9fd}.message strong{display:block;font-size:11px;color:var(--muted);margin-bottom:3px}.composer{background:white;padding:16px 20px;border-top:1px solid var(--line)}.composer label{position:absolute;clip-path:inset(50%);width:1px;height:1px;overflow:hidden}.composebox{display:flex;gap:12px;align-items:flex-end}.composebox textarea{border:0;resize:vertical;min-height:45px;max-height:160px;flex:1;padding:9px 4px;line-height:1.5;background:transparent;min-width:0}.composebox button{flex:none}.composerfooter{display:flex;justify-content:space-between;gap:12px;margin-top:8px;font-size:11px;color:var(--muted)}.starters{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.starters button{font-size:12px;background:rgba(255,255,255,.8);font-weight:450;min-height:32px}.changebar{font-size:12px;display:flex;align-items:center;gap:8px;padding:0 24px 12px;color:var(--muted);background:white}.changebar button{font-size:12px;min-height:28px;padding:2px 6px;color:var(--accent);border:0}.stepper{display:flex;list-style:none;gap:0;padding:0;margin:0 0 24px}.stepper li{flex:1;position:relative;display:flex;align-items:center;gap:8px;font-size:12px}.stepper li:not(:last-child):after{content:"";height:1px;background:var(--line);flex:1;margin:0 12px 0 6px}.stepper button{display:flex;align-items:center;gap:8px;border:0;padding:0;background:transparent;min-height:28px;font-weight:450;text-align:left}.stepper .coin{height:24px;width:24px;border:1px solid var(--line);display:grid;place-items:center;border-radius:50%;font-size:11px;flex:none}.stepper [aria-current] button{font-weight:650}.stepper [aria-current] .coin{outline:2px solid var(--accent);outline-offset:2px}.stepper .done .coin{background:var(--positive);border-color:var(--positive);color:white}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{margin-bottom:18px}.field label{display:block;font-size:13px;font-weight:550;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;border:1px solid #ccc;border-radius:6px;background:#fff;padding:9px 11px;min-height:38px;color:var(--ink)}.field textarea{min-height:110px;line-height:1.55;resize:vertical}.field input:read-only{background:#fafafa}.field .help{margin-top:5px;font-size:12px;color:var(--muted);line-height:1.5}.error{font-size:12px;color:var(--critical);margin-top:6px;line-height:1.5}.error:empty{display:none}[aria-invalid=true]{border-color:var(--critical)!important}.formfoot{border-top:1px solid var(--line);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}.formfoot p{font-size:12px;margin:0}.connection{display:flex;align-items:center;gap:12px;padding:16px;border:1px solid var(--line);border-radius:8px;margin:16px 0}.connection .fill{flex:1}.connection p{font-size:12px;margin:2px 0}.choicegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{display:flex;gap:12px;padding:18px;text-align:left;align-items:center;border-radius:8px;min-height:80px}.choice .title{display:block;margin-bottom:5px}.choice small{font-weight:400;display:block}.code{font:12px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;background:#fafafa;border:1px solid var(--line);border-radius:6px;margin:12px 0}.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:24px}.note{font-size:12px;background:#f5f8f8;border:1px solid #dce8e8;border-radius:6px;padding:12px 14px;color:#474747;line-height:1.6;margin:14px 0}.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:6px}table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}caption{text-align:left;padding:10px 12px;color:var(--muted);background:#fafafa;border-bottom:1px solid var(--line)}th{font-weight:550;background:#fafafa;color:#666}th,td{padding:11px 12px;border-bottom:1px solid #ededed;white-space:nowrap}tbody tr:last-child td{border-bottom:0}.successbox{display:flex;align-items:flex-start;gap:12px;padding:20px;border:1px solid #cce5d7;border-radius:8px;background:#f5fbf7}.successicon{display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:50%;background:var(--positive);color:white}.prooflist{list-style:none;padding:0;margin:20px 0}.prooflist li{display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--line);font-size:13px}.reviewlist{margin:0}.reviewlist>div{display:grid;grid-template-columns:140px 1fr;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}.reviewlist dt{color:var(--muted)}.reviewlist dd{margin:0;line-height:1.6}.statusline{font-size:12px;color:var(--muted);min-height:20px}.empty{padding:28px;text-align:center}.empty p{font-size:12px}.researchdetails{margin-top:28px;border-top:1px solid var(--line);padding-top:16px}.researchdetails summary{cursor:pointer;font-size:12px;color:var(--muted)}.researchdetails h3{margin-top:20px}.researchdetails li{font-size:12px;line-height:1.7;color:var(--muted);margin-bottom:6px}.researchdetails .grid2{gap:28px}.resume{padding:12px 16px;background:#f7f4ff;border:1px solid #e8e0f8;border-radius:8px;display:flex;gap:12px;align-items:center;margin-bottom:20px}.resume p{font-size:12px;flex:1;margin:0}footer{font-size:11px;color:var(--muted);line-height:1.6;padding-top:8px}.checkbox{display:flex;align-items:center;gap:8px;font-size:13px;margin:14px 0}.checkbox input{accent-color:var(--accent)}[hidden]{display:none!important}@media(max-width:1050px){.main{padding:24px}.shell{grid-template-columns:175px 1fr}.summary dl{grid-template-columns:1fr 1fr}.split{grid-template-columns:1fr}.stepper li:after{margin:0 8px!important}}@media(max-width:740px){aside{display:none}.shell{display:block}.main{padding:20px 16px}.pagehead{flex-direction:column}.researchbar{padding:8px 16px}.researchbar span:last-child{display:none}.summary dl,.grid2,.choicegrid{grid-template-columns:1fr 1fr}.section,.agenttop{padding:20px}.stepper li{font-size:11px}.stepper button{flex-direction:column;gap:7px}.stepper li:not(:last-child):after{align-self:14px;position:absolute;left:calc(50% + 20px);right:-10px;top:13px}.stepper li{justify-content:center}.formfoot{align-items:flex-start}.reviewlist>div{grid-template-columns:100px 1fr}.composebox{flex-direction:column;align-items:stretch}.composebox textarea{font-size:16px;width:100%;min-height:72px}.composebox button{align-self:flex-end}.composerfooter{flex-direction:column;gap:4px}.composebox button{padding:8px}.breadcrumb{margin-bottom:22px}h1{font-size:25px}}@media(prefers-reduced-motion:no-preference){.panel{animation:reveal .18s ease-out}@keyframes reveal{from{opacity:.7;transform:translateY(3px)}to{opacity:1;transform:none}}}
-</style></head><body>
-<div class="researchbar"><span>Interactive research prototype · Sample data · Guided responses</span><span><a href="customerio-sdk-setup.html" target="_blank" rel="noopener">Open live SDK test website ↗</a></span></div>
-<div class="shell"><aside><div><div class="brand">Customer.io</div><div class="workspace">Research workspace⌄</div></div><div class="nav"><span>Home</span><span>Automations</span><span>People</span><div class="navlabel">Configure data</div><span>Data index</span><span class="selected">Integrations</span><span>Settings</span></div><div class="asidefoot small">One Simple Experience<br>Integration setup exploration</div></aside>
-<main class="main"><div class="content"><div class="breadcrumb"><span>Integrations</span><span>/</span><span>New connection</span></div><header class="pagehead"><div><h1>What would you like to connect?</h1><p>Start with a goal. Add the details however you prefer.</p></div><div class="actions"><button id="save-draft">Save draft</button><button class="quiet" id="reset">Start over</button></div></header>
-<div id="resume" class="resume" hidden><p>A saved research draft is available. It contains setup choices, without credentials or conversation history.</p><button id="restore">Resume draft</button><button id="dismiss-resume" class="quiet">Discard draft</button></div>
-<section class="panel" aria-label="Setup summary"><div id="summary" class="summary"></div></section>
-<section class="agent" aria-label="Inline setup Agent"><div class="agenttop"><div class="agentlabel"><span class="spark" aria-hidden="true">✧</span> The Agent <span class="pill purple">Setup guide</span><button id="toggle-thread" class="quiet" type="button" aria-expanded="false" aria-controls="thread" hidden>View conversation</button></div><p class="agentmessage" id="agent-message">Tell me the outcome you want. A rough idea is enough, and you can add connection details or use the form along the way.</p><div class="starters" id="starters"><button data-prompt="Connect my website and track demo requests">Connect my website</button><button data-prompt="Sync contacts in the United States from PostgreSQL">Sync contacts from PostgreSQL</button><button data-prompt="I want to connect Salesforce">Connect Salesforce</button><button data-prompt="Send demo requests to Google Sheets">Send events to Google Sheets</button></div></div><div class="thread" id="thread" aria-label="Conversation" hidden></div><div class="composer"><form id="conversation-form"><label for="request">Describe your setup or changes</label><div class="composebox"><textarea id="request" rows="1" placeholder="Describe a setup or paste JSON" maxlength="6000"></textarea><button type="submit" class="primary" id="send">Send request ↑</button></div><div id="request-error" class="error" role="alert"></div><div class="composerfooter"><span>Conversation and forms update the same draft.</span><span>Use sample values. Keep real secrets in Customer.io.</span></div></form></div><div id="changebar" class="changebar" hidden><span id="change-text"></span><button id="undo">Undo change</button></div></section>
-<div id="stage-root"></div><div class="statusline" id="status" role="status" aria-live="polite"></div>
-<details class="researchdetails"><summary>Research scope and experience decisions</summary><div class="grid2"><div><h3>Included delight opportunities</h3><ol><li>Recognize compatible existing work before requesting credentials.</li><li>Extract JSON and connection details into editable fields.</li><li>Suggest a starting point grounded in a visible sample schema.</li><li>Show the resulting person, event, or spreadsheet row.</li><li>Explain empty previews and offer a concrete recovery.</li><li>Keep valid fields when a check fails.</li><li>Save a credential-free draft and resume at the current step.</li><li>Summarize changes, support undo, and invalidate older previews.</li><li>Separate connection, preview, activation, and first-outcome evidence.</li></ol></div><div><h3>What this prototype tests</h3><p class="small">Website SDK, PostgreSQL, Salesforce source and destination, and Google Sheets destination paths share one summary, inline conversation, and current tool. Guided responses run locally. Account names, database rows, authorization, and completion evidence are simulated.</p><p class="small">The separate SDK test website exercised real ingestion into the test workspace. A prototype completion here is not a live connection or a real import.</p><p class="small">Uses Pluma's documented form, panel, text-field, and inline Agent patterns with selected light-theme tokens. This static exploration does not load production Pluma components.</p><h3>Next validation questions</h3><p class="small">Can someone switch between conversation and controls without repeating information? Which choices need clarification? Is the next action apparent? Does a success state make clear what was actually verified?</p></div></div></details><footer>Research prototype · Nothing here connects to providers or sends events. Only an explicitly saved, credential-free draft is stored in this browser.</footer>
-</div></main></div>
-<script>
-'use strict';
-const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const STORAGE='cio-inline-research-draft-v1';
-const fixture=[{id:'contact_101',email:'alex@example.test',name:'Alex Chen',country:'US',mailing_country:'Canada',active:true},{id:'contact_102',email:'sam@example.test',name:'Sam Rivera',country:'United States',mailing_country:'United States',active:true},{id:'contact_103',email:'jordan@example.test',name:'Jordan Bell',country:'Canada',mailing_country:'United States',active:true},{id:'contact_104',email:'casey@example.test',name:'Casey Park',country:'US',mailing_country:'US',active:false},{id:'contact_105',email:'morgan@example.test',name:'Morgan Lee',country:'Germany',mailing_country:'Germany',active:true},{id:'contact_106',email:'riley@example.test',name:'Riley Green',country:'United States',mailing_country:'Canada',active:true}];
-const initial=()=>({kind:'',stage:0,connected:false,connection:'existing',source:'Website · Research',framework:'JavaScript',site:'https://example.test',host:'db.example.test',port:'5432',database:'people',username:'readonly',environment:'Sandbox',direction:'',object:'Lead',operation:'Create',lastName:'Chen',company:'Example Research',recordId:'',spreadsheet:'https://docs.google.com/spreadsheets/d/research-example/edit',sheet:'Demo requests',rowKey:'event_id',event:'Demo Requested',personId:'customer_id',country:'all',countryField:'',activeOnly:false,frequency:'Manual',idField:'id',previewed:false,proof:false,proofTime:'',savedAt:''});
-let state=initial(),history=[],messages=[],latestChange='',savedDraft=null;
-const names={sdk:'JavaScript',postgres:'PostgreSQL',salesforce:'Salesforce',sheets:'Google Sheets'};
-const isSalesforceDestination=()=>state.kind==='salesforce'&&state.direction==='out';
-const isRecords=()=>state.kind==='postgres'||(state.kind==='salesforce'&&!isSalesforceDestination());
-const steps=()=>state.kind==='sdk'?['Connection','Installation','Preview','Outcome']:['Connection','Data','Preview','Outcome'];
-function clearEvidence(){state.previewed=false;state.proof=false;state.proofTime='';}
-function checkpoint(){history.push(structuredClone(state));if(history.length>20)history.shift();}
-function change(patch,description){checkpoint();if('direction' in patch&&patch.direction!==state.direction)patch.connected=false;Object.assign(state,patch);clearEvidence();if(state.stage>1)state.stage=state.connected?1:0;latestChange=description;render();}
-function say(text){messages.push({who:'The Agent',text});renderThread();}
-function renderThread(){ $('toggle-thread').hidden=!messages.length; $('thread').innerHTML=messages.slice(-8).map(m=>'<div class="message '+(m.who==='You'?'you':'theagent')+'"><strong>'+m.who+'</strong>'+esc(m.text)+'</div>').join('');$('thread').scrollTop=$('thread').scrollHeight;}
-function status(t){$('status').textContent=t;}
-function hint(){if(!state.kind)return'Tell me the outcome you want. A rough idea is enough, and you can add connection details or use the form along the way.';if(state.stage===0)return({sdk:'There is a compatible website source in this sample workspace. Reuse it, or start a separate connection.',postgres:'Use the sample read-only connection, or fill in the same fields from sample JSON. Your data choices stay with the draft.',salesforce:!state.direction?'What do you want to do with Salesforce? Bring contacts into Customer.io, or send records to Salesforce?':isSalesforceDestination()?'Choose the Salesforce environment, then inspect the record operation and its required fields.':'Choose the Salesforce environment, then authorize the sample account. The next screen will use that account’s available fields.',sheets:'Connect the sample Google account. Then choose the spreadsheet, tab, and how a row is matched.'})[state.kind];if(state.stage===1)return({sdk:'The connection is selected. Now choose the installation path and describe the first event you want to track.',postgres:state.country!=='all'&&!state.countryField?'The sample has two country fields. Which one describes the contacts you mean? I will use that choice for the query and preview.':'The sample schema is available. Review the suggested query, identity, and cadence together.',salesforce:isSalesforceDestination()?'Choose a record and operation. The sample account exposes the fields required for that action.':state.country!=='all'&&!state.countryField?'The sample Salesforce account has Contact Country and Mailing Country. Choose the meaning before applying the filter.':'Start with Contacts. Choose which fields matter and inspect the resulting profiles before enabling anything.',sheets:'A spreadsheet URL supplies the document ID. Choose the tab and a stable row key so retries update the same request.'})[state.kind];if(state.stage===2)return'Here is the resulting shape and the evidence behind it. Change a field or ask for an adjustment; the preview will become due for another check.';return state.proof?'The sample outcome is verified for this run. In the product, the same state must come from recent source or destination evidence.':'The configuration is ready for a sample check. Previewing data is separate from a successful first outcome.';}
-function field(id,label,value,help='',type='text'){return'<div class="field"><label for="'+id+'">'+label+'</label><input id="'+id+'" name="'+id+'" type="'+type+'" value="'+esc(value)+'" '+(type==='number'?'min="1" max="65535"':'')+' autocomplete="off" data-1p-ignore><div class="help">'+help+'</div><div id="'+id+'-error" class="error" role="alert"></div></div>';}
-function select(id,label,value,options,help=''){return'<div class="field"><label for="'+id+'">'+label+'</label><select id="'+id+'">'+options.map(o=>{let[v,l]=Array.isArray(o)?o:[o,o];return'<option value="'+esc(v)+'" '+(v===value?'selected':'')+'>'+esc(l)+'</option>'}).join('')+'</select><div class="help">'+help+'</div><div id="'+id+'-error" class="error" role="alert"></div></div>';}
-function error(id,text){let el=$(id);if(el)el.setAttribute('aria-invalid','true');let out=$(id+'-error');if(out)out.textContent=text;}
-function render(){
- $('status').textContent='';
- $('starters').hidden=!!state.kind;$('agent-message').textContent=hint();$('changebar').hidden=!history.length;$('change-text').textContent=latestChange;$('save-draft').disabled=!state.kind;
- $('summary').innerHTML=!state.kind?'<div class="summaryempty"><span class="roundicon" aria-hidden="true">⇄</span><div><h3>Setup details</h3><p class="small">Your goal and choices will appear here as you go.</p></div></div>':'<div class="actions" style="justify-content:space-between"><h3>Setup details</h3><span class="pill">'+(state.proof?'Sample verified':state.previewed?'Sample preview':state.connected?'Sample connected':'Draft')+'</span></div><dl><div><dt>Integration</dt><dd>'+(state.kind==='salesforce'&&!state.direction?'Salesforce <span class="small">· Outcome pending</span>':(state.kind==='sheets'||isSalesforceDestination())?'Customer.io <span class="small">→</span> '+names[state.kind]:names[state.kind]+' <span class="small">→ Customer.io</span>')+'</dd></div><div><dt>Goal</dt><dd>'+esc(goal())+'</dd></div><div><dt>Connection</dt><dd>'+esc(state.kind==='postgres'?state.database:state.kind==='salesforce'?state.environment:state.kind==='sheets'?'Google · Research account':state.source)+'</dd></div><div><dt>Next step</dt><dd>'+esc(state.proof?'Inspect the evidence':steps()[state.stage])+'</dd></div></dl>';
- let body='';if(!state.kind){body='<section class="panel"><div class="panelhead"><h2>Integration</h2><span class="small">Or choose directly</span></div><div class="section choicegrid">'+[['sdk','Website SDK','Track page visits and product events','⌘'],['postgres','PostgreSQL','Sync people from your database','▤'],['salesforce','Salesforce','Bring CRM contacts into Customer.io','☁'],['sheets','Google Sheets','Send events to spreadsheet rows','▦']].map(([k,t,d,i])=>'<button class="choice" data-kind="'+k+'"><span class="roundicon" aria-hidden="true">'+i+'</span><span><span class="title">'+t+'</span><small>'+d+'</small></span></button>').join('')+'</div></section>';}
- else{body='<ol class="stepper" aria-label="Setup progress">'+steps().map((s,i)=>'<li class="'+(i<state.stage?'done':'')+'" '+(i===state.stage?'aria-current="step"':'')+'><button data-stage="'+i+'" '+(i>state.stage?'disabled':'')+'><span class="coin" aria-hidden="true">'+(i<state.stage?'✓':i+1)+'</span>'+s+'</button></li>').join('')+'</ol>';body+=state.stage===0?connectionPanel():state.stage===1?dataPanel():state.stage===2?previewPanel():outcomePanel();}
- $('stage-root').innerHTML=body;renderThread();bindStage();
-}
-function goal(){return state.kind==='salesforce'&&!state.direction?'Choose an outcome':isSalesforceDestination()?state.operation+' '+state.object+' records':state.kind==='sdk'?'Track '+state.event:state.kind==='sheets'?state.event+' → spreadsheet':(state.country==='us'?'US contacts':state.country==='ca'?'Canadian contacts':state.country==='empty'?'Contacts in Japan':'Contacts')+(state.activeOnly?' · Active only':'');}
-function connectionPanel(){let c='';
- if(state.kind==='sdk')c='<div class="connection"><span class="roundicon" aria-hidden="true">⌘</span><div class="fill"><strong>Website · Research</strong><p>JavaScript source · US workspace · Sample existing connection</p></div><span class="pill positive">Available</span></div>'+select('connection','Source choice',state.connection,[['existing','Reuse Website · Research'],['new','Create a separate source']])+field('site','Website URL',state.site,'Used to open and test the installation.');
- if(state.kind==='postgres')c='<div class="connection"><span class="roundicon" aria-hidden="true">▤</span><div class="fill"><strong>People · Read-only replica</strong><p>PostgreSQL · people database · Sample existing connection</p></div><span class="pill positive">Available</span></div>'+select('connection','Connection choice',state.connection,[['existing','Reuse People · Read-only replica'],['new','Use sample connection details']])+(state.connection==='new'?'<div class="grid2">'+field('host','Host',state.host)+field('port','Port',state.port,'','number')+field('database','Database name',state.database)+field('username','Username',state.username)+'</div><p class="small">This research page uses sample connection details. Real passwords belong in the secure Customer.io connection form.</p>':'<p class="small">The saved sample connection includes the database details. There is nothing to enter again.</p>');
- if(state.kind==='salesforce')c=select('direction','Outcome',state.direction,[['','Choose an outcome'],['in','Bring Salesforce contacts into Customer.io'],['out','Send Customer.io data to Salesforce']],'The outcome determines the access and fields needed.')+select('environment','Environment',state.environment,['Sandbox','Production'])+'<div class="note">'+(!state.direction?'Choose an outcome to view its authorization requirements.':isSalesforceDestination()?'The selected organization and record operation determine the required fields. This sample simulates authorization; account-specific validation must be checked against the real organization.':'The source flow requires an administrator to install the Customer.io External Client App before authorization. This sample simulates that handoff and does not request access.')+'</div><div class="connection"><span class="roundicon" aria-hidden="true">☁</span><div><strong>Research organization</strong><p>Sample account · Authorization has not been checked</p></div></div>';
- if(state.kind==='sheets')c='<div class="connection"><span class="roundicon" aria-hidden="true">▦</span><div><strong>Google · Research account</strong><p>Sample account with access to the Demo requests spreadsheet</p></div></div><p>Authorization establishes account access. The next step checks the particular spreadsheet and tab.</p>';
- return'<section class="panel"><div class="panelhead"><h2>Connection</h2><span class="pill">Sample data</span></div><form id="connection-form"><div class="section">'+c+'<div class="error" id="connection-error" role="alert"></div></div><div class="formfoot"><p>Nothing starts syncing at this step.</p><button class="primary" type="submit">'+(state.kind==='salesforce'||state.kind==='sheets'?'Simulate authorization':state.connection==='existing'?'Use connection':'Check sample connection')+'</button></div></form></section>';}
-function query(){if(state.country!=='all'&&!state.countryField)return'Choose a country field to generate the filter.';let field=state.countryField||'country';let terms=[];if(state.country==='us')terms.push('"'+field+'" IN (\'US\', \'United States\')');if(state.country==='ca')terms.push('"'+field+'" = \'Canada\'');if(state.country==='empty')terms.push('"'+field+'" = \'Japan\'');if(state.activeOnly)terms.push('"active" = true');return'SELECT "id", "email", "name", "country", "mailing_country"\nFROM "contacts"'+(terms.length?'\nWHERE '+terms.join('\n  AND '):'')+'\nLIMIT 20;';}
-function rows(){return fixture.filter(r=>(state.country==='all'||(state.country==='us'?['US','United States']:state.country==='ca'?['Canada']:['Japan']).includes(r[state.countryField||'country']))&&(!state.activeOnly||r.active));}
-function dataPanel(){let c='',title=state.kind==='sdk'?'Installation and events':state.kind==='sheets'?'Spreadsheet rows':isSalesforceDestination()?'CRM record':'Contacts and filters';
- if(state.kind==='sdk')c='<div class="split"><div>'+select('framework','Website framework',state.framework,['JavaScript','React','Next.js'])+field('event','Event name',state.event,'Use the action people perform in your product.')+field('personId','Person identifier',state.personId,'Identify after login with a stable ID from your application.')+'</div><div><h3>Installation paths</h3><p class="small">Both paths use the same source and event choices.</p><div class="connection"><div><strong>Work with a coding agent</strong><p>Use the current source’s generated setup instructions.</p><button type="button" id="handoff">Simulate handoff</button></div></div><div class="connection"><div><strong>Set up directly</strong><p>Install once, send page activity, identify after login, then track the action.</p><a href="customerio-sdk-setup.html" target="_blank" rel="noopener">Open SDK test website ↗</a></div></div><p id="handoff-status" class="small"></p></div></div>';
- if(state.kind==='sheets')c=field('spreadsheet','Spreadsheet URL or ID',state.spreadsheet,'The document ID is extracted from a Google Sheets URL.')+'<div class="grid2">'+select('sheet','Worksheet',state.sheet,['Demo requests','Archive'])+select('rowKey','Row identifier',state.rowKey,['event_id','email'],'A matching key updates the existing row; a new key adds a row.')+'</div>'+field('event','Event',state.event,'Choose the incoming action that should become a row.')+'<div class="note">Suggested mapping: event ID → event_id, email → email, interest → interest. This sample uses the accessible Demo requests document.</div>';
- if(isSalesforceDestination())c='<div class="split"><div><div class="grid2">'+select('object','Record type',state.object,['Lead','Contact'])+select('operation','Operation',state.operation,['Create','Update'])+'</div>'+field('lastName','Last name',state.lastName,state.operation==='Create'?'Required when creating the sample '+state.object.toLowerCase()+'.':'This sample updates the last name. Choose the value to write.')+(state.object==='Lead'&&state.operation==='Create'?field('company','Company',state.company,'Required when creating a lead in this sample.'):state.operation==='Update'?field('recordId','Salesforce record ID',state.recordId,'Identify the existing record to update.'):'')+'</div><div><h3>Account requirements</h3><div class="note">Research organization · '+esc(state.environment)+'. The sample '+state.operation.toLowerCase()+' '+state.object.toLowerCase()+' action uses the fields shown here. Custom fields, validation rules, record types, and field-level permissions can add requirements in a real account.</div><p class="small">Preview the exact record before sending it. Authorizing an organization does not activate an action.</p></div></div>';
- if(isRecords())c='<div class="split"><div><div class="note">Sample '+(state.kind==='postgres'?'schema':'account fields')+': contacts · id, email, name, country, mailing_country, active. These are fixture fields, not a discovery of your test database.</div><div class="grid2">'+select('country','Contact filter',state.country,[['all','All countries'],['us','United States'],['ca','Canada'],['empty','Japan · Empty sample']])+select('countryField','Country meaning',state.countryField,[['','Choose a country field'],['country','Contact country'],['mailing_country','Mailing country']],'These fields return different people in this sample.')+'</div><label class="checkbox"><input id="activeOnly" type="checkbox" '+(state.activeOnly?'checked':'')+'> Include active contacts only</label><div class="grid2">'+select('idField','Profile identifier',state.idField,['id','email'])+select('frequency','Sync schedule',state.frequency,['Manual','Hourly','Daily'],'Manual is suggested until the first preview is checked.')+'</div></div><div><h3>'+(state.kind==='postgres'?'Suggested SQL':'Filter meaning')+'</h3><p class="small">'+(state.kind==='postgres'?'Generated from the sample fields and visible choices. No query runs against a real database.':'The selected country field controls which sample contacts match.')+'</p><pre class="code" id="query-preview">'+esc(query())+'</pre><button type="button" id="explain-query">Explain selection</button></div></div>';
- return'<section class="panel"><div class="panelhead"><h2>'+title+'</h2><span class="pill">Editable draft</span></div><form id="data-form"><div class="section">'+c+'<div class="error" id="data-error" role="alert"></div></div><div class="formfoot"><button type="button" id="back">Back</button><button type="submit" class="primary">Preview sample</button></div></form></section>';}
-function resultObject(){if(isSalesforceDestination())return{object:state.object,operation:state.operation,fields:{LastName:state.lastName,...(state.object==='Lead'&&state.operation==='Create'?{Company:state.company}:{}),...(state.operation==='Update'?{Id:state.recordId}:{})}};if(state.kind==='sdk')return{type:'track',userId:'research_person_101',event:state.event,properties:{interest:'Integration setup',research_test:true}};if(state.kind==='sheets')return{id:state.rowKey==='event_id'?'demo_101':'alex@example.test',event_id:'demo_101',email:'alex@example.test',interest:'Integration setup',research_test:'true'};let r=rows()[0];return r?{id:r[state.idField],email:r.email,name:r.name,country:r.country}:null;}
-function table(){let data=rows();return'<div class="tablewrap"><table><caption>'+data.length+' of '+fixture.length+' sample contacts match · Up to 20 rows</caption><thead><tr><th scope="col">ID</th><th scope="col">Email</th><th scope="col">Contact country</th><th scope="col">Mailing country</th></tr></thead><tbody>'+data.map(r=>'<tr><td>'+r.id+'</td><td>'+r.email+'</td><td>'+r.country+'</td><td>'+r.mailing_country+'</td></tr>').join('')+'</tbody></table></div>';}
-function previewPanel(){let db=isRecords(),count=db?rows().length:1;let c=db?(count?table():'<div class="empty"><h3>No sample contacts match</h3><p>The connection is available. The selected country filter returns no rows in the fixture.</p><button id="remove-filter">Preview all countries</button></div>'):'<div class="note">'+(state.kind==='sdk'?'Page activity → identified person → '+esc(state.event)+'. These are separate checks.':isSalesforceDestination()?'The '+esc(state.operation.toLowerCase())+' operation will affect one sample '+esc(state.object.toLowerCase())+' record. No real record will be written.':'Upsert Sheet adds a dedicated id column for the selected row identifier. New keys add rows; a repeated '+esc(state.rowKey)+' updates the matching row. The sample research_test value is written as text.')+'</div>';
- return'<section class="panel"><div class="panelhead"><h2>Result preview</h2><span class="pill">Sample data</span></div><div class="section">'+c+'<div class="split" style="margin-top:24px"><div><h3>'+esc(state.kind==='sheets'?'Resulting row':state.kind==='sdk'?'Resulting event':isSalesforceDestination()?'Resulting record':'Resulting profile')+'</h3><pre class="code">'+esc(JSON.stringify(resultObject(),null,2))+'</pre></div><div><h3>Setup choices</h3><dl class="reviewlist"><div><dt>Connection</dt><dd>'+esc(names[state.kind])+' · Sample workspace</dd></div><div><dt>Identity</dt><dd>'+esc(state.kind==='sdk'?state.personId:state.kind==='sheets'?state.rowKey:isSalesforceDestination()?(state.operation==='Create'?'New Salesforce record':state.recordId):state.idField)+'</dd></div><div><dt>Behavior</dt><dd>'+esc(state.kind==='sdk'?'One initial page event; identify after login':state.kind==='sheets'?'Add or update a row in '+state.sheet:isSalesforceDestination()?state.operation+' '+state.object:state.frequency+' sync · Create or update profiles')+'</dd></div><div><dt>Evidence</dt><dd>Fixture preview only. Nothing has been sent or activated.</dd></div></dl></div></div></div><div class="formfoot"><button id="back">Edit choices</button><button id="review" class="primary" '+(!count?'disabled':'')+'>Review outcome</button></div></section>';}
-function outcomePanel(){return'<section class="panel"><div class="panelhead"><h2>First outcome</h2><span class="pill '+(state.proof?'positive':'')+'">'+(state.proof?'Sample verified':'Ready to test')+'</span></div><div class="section">'+(state.proof?'<div class="successbox"><span class="successicon" aria-hidden="true">✓</span><div><h3>'+esc(state.kind==='sdk'?state.event+' received':state.kind==='sheets'?'Spreadsheet row accepted':isSalesforceDestination()?'CRM record accepted':'First sync completed')+' · Simulated</h3><p class="small">Matched to this sample run at '+esc(new Date(state.proofTime).toLocaleTimeString())+'. No provider connection, import, or delivery occurred.</p></div></div>':'<p>Run the sample check to explore how the first verified result would appear.</p>')+'<ul class="prooflist"><li><span>Connection access</span><span class="pill positive">Sample checked</span></li><li><span>Result preview</span><span class="pill positive">Sample checked</span></li><li><span>'+esc(state.kind==='sdk'?'Page, identify, and event receipt':state.kind==='sheets'?'Accepted row in worksheet':isSalesforceDestination()?'Accepted record in Salesforce':'Completed sync with matching profiles')+'</span><span class="pill '+(state.proof?'positive':'')+'">'+(state.proof?'Simulated':'Not checked')+'</span></li></ul><div class="note">In Customer.io, completion should come from a recent event or provider result for this connection. An authorization screen or local preview cannot establish that result.</div>'+(state.kind==='sdk'?'<a href="customerio-sdk-setup.html" target="_blank" rel="noopener">Exercise the real SDK on the test website ↗</a>':'')+'</div><div class="formfoot"><button id="back">Back to preview</button><button id="verify" class="primary" '+(state.proof?'disabled':'')+'>Simulate first outcome</button></div></section>';}
-function bindStage(){document.querySelectorAll('[data-kind]').forEach(b=>b.onclick=()=>choose(b.dataset.kind));document.querySelectorAll('[data-stage]').forEach(b=>b.onclick=()=>{state.stage=Number(b.dataset.stage);render()});let f=$('connection-form');if(f)f.onsubmit=e=>{e.preventDefault();connect()};let d=$('data-form');if(d)d.onsubmit=e=>{e.preventDefault();preview()};if($('back'))$('back').onclick=()=>{state.stage=Math.max(0,state.stage-1);render()};if($('review'))$('review').onclick=()=>{state.stage=3;render()};if($('verify'))$('verify').onclick=()=>{if(!state.previewed||!state.connected){state.stage=state.connected?1:0;render();status('Preview the current draft before checking an outcome.');return;}checkpoint();state.proof=true;state.proofTime=new Date().toISOString();latestChange='Ran the sample outcome check.';render();say('The simulated outcome is complete. The live product would show the matched event or operation and timestamp here.');};if($('remove-filter'))$('remove-filter').onclick=()=>{change({country:'all',stage:1},'Removed the country filter. Preview the selection again.');};if($('handoff'))$('handoff').onclick=()=>{$('handoff-status').textContent='Waiting for installation. The draft is preserved; copying instructions would not mark the SDK as installed.';say('Installation is waiting on the developer. Continue here when ready, or use the SDK test website to exercise the events.');};if($('explain-query'))$('explain-query').onclick=()=>say(state.country==='all'?'The sample query selects contact identity and attributes, without a country filter. The LIMIT bounds the displayed rows, not a warehouse scan cost.':'The query uses '+(state.countryField||'an unselected country field')+'. The US spellings come from this fixture. The real experience must inspect accessible schema and values instead of assuming a format.');
- for(const key of ['connection','site','host','port','database','username','environment','framework','event','personId','spreadsheet','sheet','rowKey','country','countryField','frequency','idField','activeOnly','direction','object','operation','lastName','company','recordId']){let el=$(key);if(!el)continue;el.onchange=()=>{let value=el.type==='checkbox'?el.checked:el.value;if(state[key]===value)return;if(typeof value==='string'&&sensitive(value)){el.value=state[key];error(key,'Use a sample value without a password or secret.');return;}let patch={[key]:value};if(['site','host','port','database','username','environment','connection','direction'].includes(key))patch.connected=false;change(patch,'Updated '+key.replace(/([A-Z])/g,' $1').toLowerCase()+'. Any previous preview needs another check.');};}
-}
-function choose(kind){change({...initial(),kind,...(kind==='salesforce'?{direction:'in'}:{})},'Selected '+names[kind]+'.');say(hint());}
-function validURL(v){try{return ['https:','http:'].includes(new URL(v).protocol)}catch{return false}}
-function connect(){let ok=true;if(state.kind==='salesforce'&&!state.direction){error('direction','Choose which outcome you want before authorizing access.');ok=false;}if(state.kind==='postgres'){for(let k of ['host','database','username'])if(!state[k].trim()){error(k,'Enter the sample '+k+'.');ok=false;}if(!/^\d+$/.test(state.port)||Number(state.port)<1||Number(state.port)>65535){error('port','Enter a port from 1 to 65535.');ok=false;}if(!/^[a-zA-Z0-9.-]+$/.test(state.host)){error('host','Use a hostname such as db.example.test.');ok=false;}}if(state.kind==='sdk'&&!validURL(state.site)){error('site','Enter a website URL beginning with https:// or http://.');ok=false;}if(!ok)return;checkpoint();state.connected=true;state.stage=1;clearEvidence();latestChange='Selected the sample connection. Nothing is enabled.';render();status('Sample connection selected. Review the data choices below.');}
-function preview(){if(!state.connected){state.stage=0;render();say('The connection details changed. Check the sample connection again before previewing data.');return;}if(isRecords()&&state.country!=='all'&&!state.countryField){error('countryField','Choose Contact country or Mailing country to define this filter.');return;}if(isSalesforceDestination()){if(!state.lastName.trim()){error('lastName',state.operation==='Create'?'Enter the last name for the sample record.':'Enter the last name to update on this sample record.');return;}if(state.object==='Lead'&&state.operation==='Create'&&!state.company.trim()){error('company','Enter the company when creating a lead.');return;}if(state.operation==='Update'&&!/^[a-zA-Z0-9]{15}(?:[a-zA-Z0-9]{3})?$/.test(state.recordId)){error('recordId','Enter a 15- or 18-character Salesforce record ID.');return;}}if(state.kind==='sdk'){if(!state.event.trim()){error('event','Enter the action to track.');return;}if(!state.personId.trim()){error('personId','Choose a stable person identifier.');return;}}if(state.kind==='sheets'){let s=state.spreadsheet.trim();if(!s||!(/^[\w-]+$/.test(s)||/^https:\/\/docs\.google\.com\/spreadsheets\/d\/[\w-]+(?:\/|$)/.test(s))){error('spreadsheet','Use a Google Sheets URL or a document ID.');return;}if(state.rowKey==='email')say('Email can repeat across demo requests. This choice updates the existing email row; event_id preserves separate requests.');}checkpoint();state.previewed=true;state.proof=false;state.stage=2;latestChange='Prepared a sample preview from the current draft.';render();}
-function sensitive(text){return /(?:password|passwd|pwd|secret|api[_ -]?key|write[_ -]?key|token)\s*["']?\s*[:=]\s*["']?[^\s",}]+/i.test(text)||/\b[a-z][a-z0-9+.-]*:\/\/[^\s/]+:[^\s@]+@/i.test(text)||/\b(?:sk|sa)_[A-Za-z0-9_-]{8,}/.test(text);}
-function parseConfig(text){let obj;try{obj=JSON.parse(text)}catch{throw new Error('Use valid sample JSON, or describe the change in a sentence.');}if(!obj||Array.isArray(obj)||typeof obj!=='object')throw new Error('Use a JSON object with named setup fields.');let allowed=['integration','host','port','database','username','site','framework','event','personId','country','countryField','activeOnly','frequency','spreadsheet','sheet','rowKey','environment','direction','object','operation','lastName','company','recordId'];let unknown=Object.keys(obj).filter(k=>!allowed.includes(k));if(unknown.length)throw new Error('Unrecognized fields: '+unknown.join(', ')+'. Supported fields: '+allowed.join(', ')+'.');let patch={};if(obj.integration){let kind={javascript:'sdk',website:'sdk',sdk:'sdk',postgresql:'postgres',postgres:'postgres',salesforce:'salesforce',sheets:'sheets',googlesheets:'sheets'}[String(obj.integration).toLowerCase().replace(/\s/g,'')];if(!kind)throw new Error('Choose sdk, postgres, salesforce, or sheets as the integration.');if(kind!==state.kind)patch={...initial(),kind};}if(!state.kind&&!patch.kind)throw new Error('Include integration so the sample fields go to the right connection.');for(let[k,v]of Object.entries(obj)){if(k==='integration')continue;if(k==='activeOnly'){if(typeof v!=='boolean')throw new Error('Use true or false for activeOnly.');}else if(!['string','number'].includes(typeof v))throw new Error('Use text for '+k+'.');patch[k]=k==='activeOnly'?v:String(v);}let enums={framework:['JavaScript','React','Next.js'],country:['all','us','ca','empty'],countryField:['country','mailing_country',''],frequency:['Manual','Hourly','Daily'],rowKey:['event_id','email'],environment:['Sandbox','Production'],direction:['','in','out'],object:['Lead','Contact'],operation:['Create','Update']};for(let[k,vals]of Object.entries(enums))if(k in patch&&!vals.includes(patch[k]))throw new Error('Use one of '+vals.join(', ')+' for '+k+'.');if('port'in patch&&(!/^\d+$/.test(patch.port)||+patch.port<1||+patch.port>65535))throw new Error('Use a port from 1 to 65535.');if(['host','port','database','username','environment','direction'].some(k=>k in patch)){patch.connected=false;if((patch.kind||state.kind)==='postgres')patch.connection='new';}return patch;}
-function request(text){text=text.trim();if(!text)return;$('request-error').textContent='';if(sensitive(text)){$('request').value='';$('request-error').textContent='This text appears to include a secret. It was not added to the conversation or saved. Use sample values here, and enter real credentials only in Customer.io.';return;}let patch={},answer='',description='Updated the draft from your request.';try{if(text.startsWith('{')){patch=parseConfig(text);answer='Applied the supported JSON fields to the same draft. Review the visible values before checking the connection.';}else{let next=/postgres|\bsql\b|database/i.test(text)?'postgres':/salesforce/i.test(text)?'salesforce':/google sheets|spreadsheet/i.test(text)?'sheets':/website|javascript|\bsdk\b|react|next\.js/i.test(text)?'sdk':state.kind;if(!next){$('request-error').textContent='Choose a sample integration: website SDK, PostgreSQL, Salesforce, or Google Sheets.';return;}if(next!==state.kind)patch={...initial(),kind:next};let effective=next;let understood=next!==state.kind;if(next==='salesforce'){if(/(?:send|push|create|update).*salesforce|to salesforce/i.test(text)){patch.direction='out';understood=true;}else if(/from salesforce|bring.*contacts|import.*salesforce/i.test(text)){patch.direction='in';understood=true;}}if(/united states|\busa?\b/i.test(text)){patch.country='us';understood=true;}if(/canad/i.test(text)){patch.country='ca';understood=true;}if(/all (countries|contacts)|remove.*(country|filter)/i.test(text)){patch.country='all';understood=true;}if(/mailing country|mailing_country/i.test(text)){patch.countryField='mailing_country';understood=true;}else if(/contact country|country field/i.test(text)){patch.countryField='country';understood=true;}if(/active (contacts|only)|only active/i.test(text)){patch.activeOnly=true;understood=true;}if(/hourly|every hour/i.test(text)){patch.frequency='Hourly';understood=true;}if(/daily|every day/i.test(text)){patch.frequency='Daily';understood=true;}if(/manual/i.test(text)){patch.frequency='Manual';understood=true;}if(/next\.js/i.test(text)){patch.framework='Next.js';understood=true;}else if(/react/i.test(text)){patch.framework='React';understood=true;}let ev=text.match(/(?:event(?: name)?|track)\s+["“]([^"”]{1,80})["”]/i);if(ev){patch.event=ev[1];understood=true;}let db=text.match(/database(?: name)?\s*(?:is|=|:)\s*["']?([a-zA-Z0-9_-]+)/i);if(db){patch.database=db[1];patch.connected=false;patch.connection='new';understood=true;}let host=text.match(/host\s*(?:is|=|:)\s*["']?([a-zA-Z0-9.-]+)/i);if(host){patch.host=host[1];patch.connected=false;patch.connection='new';understood=true;}if(!understood){$('request-error').textContent='This guided prototype supports integration choice, country filters, active contacts, framework, event names in quotes, and sync cadence. Use the form for other changes.';return;}answer=effective==='salesforce'&&!(patch.direction||state.direction)?'Salesforce can bring contacts into Customer.io or receive records from Customer.io. Choose the outcome below before authorizing access.':effective==='postgres'||(effective==='salesforce'&&(patch.direction||state.direction)!=='out')?((patch.country||state.country)!=='all'&&!(patch.countryField||state.countryField)?'I kept the country intent. The sample has Contact country and Mailing country; choose one before previewing.':'Updated the selection and query together. The previous preview and outcome must be checked again.'):'Updated the visible setup choices. Continue with the current tool below.';}
- messages.push({who:'You',text});change(patch,description);$('request').value='';say(answer);}catch(e){$('request-error').textContent=e.message;}}
-$('toggle-thread').onclick=()=>{let open=$('thread').hidden;$('thread').hidden=!open;$('toggle-thread').textContent=open?'Hide conversation':'View conversation';$('toggle-thread').setAttribute('aria-expanded',String(open));};
-$('conversation-form').onsubmit=e=>{e.preventDefault();request($('request').value)};document.querySelectorAll('[data-prompt]').forEach(b=>b.onclick=()=>request(b.dataset.prompt));$('request').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();request($('request').value)}};
-$('undo').onclick=()=>{if(!history.length)return;state=history.pop();clearEvidence();latestChange='Restored the previous draft. Preview and outcome need another check.';if(state.stage>1)state.stage=1;render();status(latestChange);};
-function safeDraft(){let d=structuredClone(state);d.proof=false;d.proofTime='';d.previewed=false;d.connected=false;d.stage=0;d.savedAt=new Date().toISOString();return d;}
-$('save-draft').onclick=()=>{try{localStorage.setItem(STORAGE,JSON.stringify(safeDraft()));status('Draft saved in this browser. Credentials and conversation are excluded. Connection access will be checked again when resumed.');}catch{status('The draft could not be saved in this browser. Keep this tab open to retain it.');}};
-function discard(){try{localStorage.removeItem(STORAGE)}catch{}savedDraft=null;$('resume').hidden=true;}
-$('reset').onclick=()=>{state=initial();history=[];messages=[];latestChange='';discard();render();status('Started a fresh research draft.');};
-$('dismiss-resume').onclick=()=>{discard();status('Saved research draft discarded.');};$('restore').onclick=()=>{if(!savedDraft)return;state={...initial(),...savedDraft,stage:0,connected:false,previewed:false,proof:false,proofTime:''};$('resume').hidden=true;history=[];messages=[];render();say('Your setup choices are back. Check connection access again, then continue to the saved data choices.');status('Draft resumed. Sample connection access needs another check.');};
-try{let raw=localStorage.getItem(STORAGE);if(raw){let d=JSON.parse(raw),keys=Object.keys(initial());if(d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).every(k=>keys.includes(k))&&Object.keys(names).includes(d.kind)&&!sensitive(raw)){savedDraft=d;$('resume').hidden=false;}}}catch{}
-render();
-</script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Integration setup · Customer.io research</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #262626;
+        --muted: #666;
+        --line: #e0e0e0;
+        --surface: #fff;
+        --subtle: #fafafa;
+        --accent: #1e7b87;
+        --accent-hover: #135e67;
+        --positive: #23744e;
+        --critical: #af2929;
+        --ai-start: #ece7fe;
+        --ai-end: #fde2d3;
+        --radius: 8px;
+        --space: 8px;
+        font-family:
+          Inter,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        font-size: 14px;
+        color: var(--ink);
+        background: var(--surface);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        outline-offset: 3px;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 2px solid var(--accent);
+      }
+      button {
+        cursor: pointer;
+        min-height: 36px;
+        padding: 7px 12px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: white;
+        color: var(--ink);
+        font-weight: 550;
+      }
+      button:hover {
+        background: #f5f5f5;
+      }
+      button:disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
+      .primary {
+        color: white;
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+      .primary:hover {
+        background: var(--accent-hover);
+      }
+      .quiet {
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+      }
+      a {
+        color: var(--accent);
+        text-underline-offset: 3px;
+      }
+      p {
+        line-height: 1.6;
+        margin: 8px 0;
+        color: var(--muted);
+      }
+      h1 {
+        font-size: 28px;
+        letter-spacing: -0.6px;
+        margin: 0 0 8px;
+        font-weight: 650;
+      }
+      h2 {
+        font-size: 17px;
+        margin: 0;
+        font-weight: 620;
+        letter-spacing: -0.2px;
+      }
+      h3 {
+        font-size: 14px;
+        margin: 0 0 8px;
+      }
+      small,
+      .small {
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+      .researchbar {
+        background: #f5f5f5;
+        border-bottom: 1px solid var(--line);
+        padding: 8px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        font-size: 12px;
+        color: #474747;
+      }
+      .researchbar a {
+        color: #474747;
+      }
+      .shell {
+        display: grid;
+        grid-template-columns: 208px 1fr;
+        min-height: calc(100vh - 41px);
+      }
+      aside {
+        border-right: 1px solid var(--line);
+        background: #fafafa;
+        padding: 24px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+      }
+      .brand {
+        font-weight: 750;
+        font-size: 18px;
+        letter-spacing: -0.4px;
+      }
+      .workspace {
+        font-size: 12px;
+        margin-top: 10px;
+        color: var(--muted);
+      }
+      .nav {
+        display: grid;
+        gap: 4px;
+      }
+      .nav span {
+        padding: 9px 12px;
+        color: var(--muted);
+        border-radius: 6px;
+      }
+      .nav .selected {
+        background: #ededed;
+        color: #262626;
+        font-weight: 600;
+      }
+      .navlabel {
+        font-size: 11px;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        padding-left: 12px;
+        margin: 20px 0 5px;
+        color: var(--muted);
+      }
+      .asidefoot {
+        margin-top: auto;
+        line-height: 1.6;
+      }
+      .main {
+        min-width: 0;
+        padding: 24px 40px 56px;
+      }
+      .breadcrumb {
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 28px;
+        display: flex;
+        gap: 8px;
+      }
+      .pagehead {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .pagehead p {
+        margin-bottom: 0;
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .content {
+        max-width: 1000px;
+        margin: auto;
+      }
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: white;
+        margin-bottom: 20px;
+        overflow: hidden;
+      }
+      .panelhead {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+      }
+      .section {
+        padding: 24px;
+      }
+      .summary {
+        padding: 20px 24px;
+        display: grid;
+        gap: 14px;
+      }
+      .summaryempty {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        min-height: 70px;
+      }
+      .roundicon {
+        display: grid;
+        place-items: center;
+        background: #f5f5f5;
+        border: 1px solid var(--line);
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        font-size: 18px;
+        flex: none;
+      }
+      .summary dl {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin: 0;
+      }
+      .summary dt {
+        color: var(--muted);
+        font-size: 12px;
+        margin-bottom: 5px;
+      }
+      .summary dd {
+        margin: 0;
+        font-weight: 550;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+      }
+      .pill {
+        font-size: 11px;
+        background: #f5f5f5;
+        color: #474747;
+        padding: 4px 8px;
+        border-radius: 20px;
+        white-space: nowrap;
+        display: inline-block;
+      }
+      .pill.positive {
+        color: #175638;
+        background: #edf7f0;
+      }
+      .pill.purple {
+        color: #6b4ab4;
+        background: #f2edfe;
+      }
+      .agent {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+      .agenttop {
+        background: radial-gradient(
+          112.04% 137.09% at 0% 14.29%,
+          color-mix(in srgb, var(--ai-start) 30%, white),
+          color-mix(in srgb, var(--ai-end) 30%, white)
+        );
+        padding: 20px 24px;
+      }
+      .agentlabel button {
+        margin-left: auto;
+        font-size: 12px;
+        min-height: 28px;
+        padding: 2px 8px;
+      }
+      .agentlabel {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+        font-size: 12px;
+        color: #68606b;
+        font-weight: 600;
+      }
+      .spark {
+        color: #8d62ce;
+        font-size: 18px;
+      }
+      .agentmessage {
+        line-height: 1.65;
+        max-width: 780px;
+        margin: 0;
+        color: var(--ink);
+      }
+      .thread {
+        max-height: 220px;
+        overflow: auto;
+        overscroll-behavior: contain;
+      }
+      .message {
+        font-size: 13px;
+        line-height: 1.6;
+        padding: 12px 24px;
+        border-top: 1px solid #eae6ee;
+      }
+      .message.you {
+        background: #fff;
+      }
+      .message.theagent {
+        background: #faf9fd;
+      }
+      .message strong {
+        display: block;
+        font-size: 11px;
+        color: var(--muted);
+        margin-bottom: 3px;
+      }
+      .composer {
+        background: white;
+        padding: 16px 20px;
+        border-top: 1px solid var(--line);
+      }
+      .composer label {
+        position: absolute;
+        clip-path: inset(50%);
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      .composebox {
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+      }
+      .composebox textarea {
+        border: 0;
+        resize: vertical;
+        min-height: 45px;
+        max-height: 160px;
+        flex: 1;
+        padding: 9px 4px;
+        line-height: 1.5;
+        background: transparent;
+        min-width: 0;
+      }
+      .composebox button {
+        flex: none;
+      }
+      .composerfooter {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 8px;
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .starters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 16px;
+      }
+      .starters button {
+        font-size: 12px;
+        background: rgba(255, 255, 255, 0.8);
+        font-weight: 450;
+        min-height: 32px;
+      }
+      .changebar {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 24px 12px;
+        color: var(--muted);
+        background: white;
+      }
+      .changebar button {
+        font-size: 12px;
+        min-height: 28px;
+        padding: 2px 6px;
+        color: var(--accent);
+        border: 0;
+      }
+      .stepper {
+        display: flex;
+        list-style: none;
+        gap: 0;
+        padding: 0;
+        margin: 0 0 24px;
+      }
+      .stepper li {
+        flex: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+      }
+      .stepper li:not(:last-child):after {
+        content: "";
+        height: 1px;
+        background: var(--line);
+        flex: 1;
+        margin: 0 12px 0 6px;
+      }
+      .stepper button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border: 0;
+        padding: 0;
+        background: transparent;
+        min-height: 28px;
+        font-weight: 450;
+        text-align: left;
+      }
+      .stepper .coin {
+        height: 24px;
+        width: 24px;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        font-size: 11px;
+        flex: none;
+      }
+      .stepper [aria-current] button {
+        font-weight: 650;
+      }
+      .stepper [aria-current] .coin {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .stepper .done .coin {
+        background: var(--positive);
+        border-color: var(--positive);
+        color: white;
+      }
+      .grid2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .field {
+        margin-bottom: 18px;
+      }
+      .field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 550;
+        margin-bottom: 7px;
+      }
+      .field input,
+      .field select,
+      .field textarea {
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        background: #fff;
+        padding: 9px 11px;
+        min-height: 38px;
+        color: var(--ink);
+      }
+      .field textarea {
+        min-height: 110px;
+        line-height: 1.55;
+        resize: vertical;
+      }
+      .field input:read-only {
+        background: #fafafa;
+      }
+      .field .help {
+        margin-top: 5px;
+        font-size: 12px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+      .error {
+        font-size: 12px;
+        color: var(--critical);
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+      .error:empty {
+        display: none;
+      }
+      [aria-invalid="true"] {
+        border-color: var(--critical) !important;
+      }
+      .formfoot {
+        border-top: 1px solid var(--line);
+        padding: 16px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .formfoot p {
+        font-size: 12px;
+        margin: 0;
+      }
+      .connection {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 16px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        margin: 16px 0;
+      }
+      .connection .fill {
+        flex: 1;
+      }
+      .connection p {
+        font-size: 12px;
+        margin: 2px 0;
+      }
+      .choicegrid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .choice {
+        display: flex;
+        gap: 12px;
+        padding: 18px;
+        text-align: left;
+        align-items: center;
+        border-radius: 8px;
+        min-height: 80px;
+      }
+      .choice .title {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .choice small {
+        font-weight: 400;
+        display: block;
+      }
+      .code {
+        font:
+          12px/1.65 ui-monospace,
+          SFMono-Regular,
+          Consolas,
+          monospace;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        padding: 16px;
+        background: #fafafa;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        margin: 12px 0;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        gap: 24px;
+      }
+      .note {
+        font-size: 12px;
+        background: #f5f8f8;
+        border: 1px solid #dce8e8;
+        border-radius: 6px;
+        padding: 12px 14px;
+        color: #474747;
+        line-height: 1.6;
+        margin: 14px 0;
+      }
+      .tablewrap {
+        overflow: auto;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        text-align: left;
+      }
+      caption {
+        text-align: left;
+        padding: 10px 12px;
+        color: var(--muted);
+        background: #fafafa;
+        border-bottom: 1px solid var(--line);
+      }
+      th {
+        font-weight: 550;
+        background: #fafafa;
+        color: #666;
+      }
+      th,
+      td {
+        padding: 11px 12px;
+        border-bottom: 1px solid #ededed;
+        white-space: nowrap;
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      .successbox {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 20px;
+        border: 1px solid #cce5d7;
+        border-radius: 8px;
+        background: #f5fbf7;
+      }
+      .successicon {
+        display: grid;
+        place-items: center;
+        width: 28px;
+        height: 28px;
+        flex: none;
+        border-radius: 50%;
+        background: var(--positive);
+        color: white;
+      }
+      .prooflist {
+        list-style: none;
+        padding: 0;
+        margin: 20px 0;
+      }
+      .prooflist li {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 13px;
+      }
+      .reviewlist {
+        margin: 0;
+      }
+      .reviewlist > div {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 20px;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .reviewlist dt {
+        color: var(--muted);
+      }
+      .reviewlist dd {
+        margin: 0;
+        line-height: 1.6;
+      }
+      .statusline {
+        font-size: 12px;
+        color: var(--muted);
+        min-height: 20px;
+      }
+      .empty {
+        padding: 28px;
+        text-align: center;
+      }
+      .empty p {
+        font-size: 12px;
+      }
+      .researchdetails {
+        margin-top: 28px;
+        border-top: 1px solid var(--line);
+        padding-top: 16px;
+      }
+      .researchdetails summary {
+        cursor: pointer;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .researchdetails h3 {
+        margin-top: 20px;
+      }
+      .researchdetails li {
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+      .researchdetails .grid2 {
+        gap: 28px;
+      }
+      .resume {
+        padding: 12px 16px;
+        background: #f7f4ff;
+        border: 1px solid #e8e0f8;
+        border-radius: 8px;
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .resume p {
+        font-size: 12px;
+        flex: 1;
+        margin: 0;
+      }
+      footer {
+        font-size: 11px;
+        color: var(--muted);
+        line-height: 1.6;
+        padding-top: 8px;
+      }
+      .checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        margin: 14px 0;
+      }
+      .checkbox input {
+        accent-color: var(--accent);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      @media (max-width: 1050px) {
+        .main {
+          padding: 24px;
+        }
+        .shell {
+          grid-template-columns: 175px 1fr;
+        }
+        .summary dl {
+          grid-template-columns: 1fr 1fr;
+        }
+        .split {
+          grid-template-columns: 1fr;
+        }
+        .stepper li:after {
+          margin: 0 8px !important;
+        }
+      }
+      @media (max-width: 740px) {
+        aside {
+          display: none;
+        }
+        .shell {
+          display: block;
+        }
+        .main {
+          padding: 20px 16px;
+        }
+        .pagehead {
+          flex-direction: column;
+        }
+        .researchbar {
+          padding: 8px 16px;
+        }
+        .researchbar span:last-child {
+          display: none;
+        }
+        .summary dl,
+        .grid2,
+        .choicegrid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .section,
+        .agenttop {
+          padding: 20px;
+        }
+        .stepper li {
+          font-size: 11px;
+        }
+        .stepper button {
+          flex-direction: column;
+          gap: 7px;
+        }
+        .stepper li:not(:last-child):after {
+          align-self: 14px;
+          position: absolute;
+          left: calc(50% + 20px);
+          right: -10px;
+          top: 13px;
+        }
+        .stepper li {
+          justify-content: center;
+        }
+        .formfoot {
+          align-items: flex-start;
+        }
+        .reviewlist > div {
+          grid-template-columns: 100px 1fr;
+        }
+        .composebox {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .composebox textarea {
+          font-size: 16px;
+          width: 100%;
+          min-height: 72px;
+        }
+        .composebox button {
+          align-self: flex-end;
+        }
+        .composerfooter {
+          flex-direction: column;
+          gap: 4px;
+        }
+        .composebox button {
+          padding: 8px;
+        }
+        .breadcrumb {
+          margin-bottom: 22px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+      }
+      @media (prefers-reduced-motion: no-preference) {
+        .panel {
+          animation: reveal 0.18s ease-out;
+        }
+        @keyframes reveal {
+          from {
+            opacity: 0.7;
+            transform: translateY(3px);
+          }
+          to {
+            opacity: 1;
+            transform: none;
+          }
+        }
+      }
+
+      .mappingrow {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 14px 16px;
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        margin-bottom: 18px;
+        overflow-wrap: anywhere;
+      }
+      .mappingrow code {
+        font-size: 12px;
+        overflow-wrap: anywhere;
+        min-width: 0;
+      }
+      .mappingrow p {
+        margin: 3px 0 0;
+      }
+      .evidenceSteps {
+        list-style: none;
+        padding: 0;
+        margin: 24px 0;
+      }
+      .evidenceSteps li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .evidenceSteps li > div {
+        max-width: 560px;
+      }
+      .evidenceSteps button {
+        flex: none;
+      }
+      .summaryedits {
+        border-top: 1px solid var(--line);
+        padding-top: 8px;
+      }
+      .summaryedits button {
+        min-height: 28px;
+        padding: 3px 0;
+        margin-right: 20px;
+        color: var(--accent);
+        font-size: 12px;
+      }
+      details > summary {
+        cursor: pointer;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      @media (max-width: 740px) {
+        .evidenceSteps li {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .mappingrow {
+          align-items: flex-start;
+          flex-direction: column;
+          gap: 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="researchbar">
+      <span
+        >Interactive research prototype · Sample data · Guided responses</span
+      ><span
+        ><a href="customerio-sdk-setup.html" target="_blank" rel="noopener"
+          >Open live SDK test website ↗</a
+        ></span
+      >
+    </div>
+    <div class="shell">
+      <aside>
+        <div>
+          <div class="brand">Customer.io</div>
+          <div class="workspace">Research workspace⌄</div>
+        </div>
+        <div class="nav">
+          <span>Home</span><span>Automations</span><span>People</span>
+          <div class="navlabel">Configure data</div>
+          <span>Data index</span><span class="selected">Integrations</span
+          ><span>Settings</span>
+        </div>
+        <div class="asidefoot small">
+          One Simple Experience<br />Integration setup exploration
+        </div>
+      </aside>
+      <main class="main">
+        <div class="content">
+          <div class="breadcrumb">
+            <span>Integrations</span><span>/</span><span>New connection</span>
+          </div>
+          <header class="pagehead">
+            <div>
+              <h1>What would you like to connect?</h1>
+              <p>Start with a goal. Add the details however you prefer.</p>
+            </div>
+            <div class="actions">
+              <button id="save-draft">Save draft</button
+              ><button class="quiet" id="reset">Start over</button>
+            </div>
+          </header>
+          <div id="resume" class="resume" hidden>
+            <p>
+              A saved research draft is available. It contains setup choices,
+              without credentials or conversation history.
+            </p>
+            <button id="restore">Resume draft</button
+            ><button id="dismiss-resume" class="quiet">Discard draft</button>
+          </div>
+          <section class="panel" aria-label="Setup summary">
+            <div id="summary" class="summary"></div>
+          </section>
+          <section class="agent" aria-label="Inline setup Agent">
+            <div class="agenttop">
+              <div class="agentlabel">
+                <span class="spark" aria-hidden="true">✧</span> The Agent
+                <span class="pill purple">Setup guide</span
+                ><button
+                  id="toggle-thread"
+                  class="quiet"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="thread"
+                  hidden
+                >
+                  View conversation
+                </button>
+              </div>
+              <p class="agentmessage" id="agent-message">
+                Tell me the outcome you want. A rough idea is enough, and you
+                can add connection details or use the form along the way.
+              </p>
+              <div class="starters" id="starters">
+                <button
+                  data-prompt="Connect my website and track demo requests"
+                >
+                  Connect my website</button
+                ><button
+                  data-prompt="Sync contacts in the United States from PostgreSQL"
+                >
+                  Sync contacts from PostgreSQL</button
+                ><button data-prompt="Send demo requests to Salesforce">
+                  Send requests to Salesforce</button
+                ><button data-prompt="Send demo requests to Google Sheets">
+                  Send events to Google Sheets
+                </button>
+              </div>
+            </div>
+            <div
+              class="thread"
+              id="thread"
+              aria-label="Conversation"
+              hidden
+            ></div>
+            <div class="composer">
+              <form id="conversation-form">
+                <label for="request">Describe your setup or changes</label>
+                <div class="composebox">
+                  <textarea
+                    id="request"
+                    rows="1"
+                    placeholder="Describe a setup or paste JSON"
+                    maxlength="6000"
+                  ></textarea
+                  ><button type="submit" class="primary" id="send">
+                    Send request ↑
+                  </button>
+                </div>
+                <div id="request-error" class="error" role="alert"></div>
+                <div class="composerfooter">
+                  <button type="button" id="sample-json" class="quiet">
+                    View sample JSON
+                  </button>
+                  <span>Conversation and forms update the same draft.</span
+                  ><span
+                    >Use sample values. Keep real secrets in Customer.io.</span
+                  >
+                </div>
+              </form>
+            </div>
+            <div id="changebar" class="changebar" hidden>
+              <span id="change-text"></span
+              ><button id="undo">Undo change</button>
+            </div>
+          </section>
+          <div id="stage-root"></div>
+          <div
+            class="statusline"
+            id="status"
+            role="status"
+            aria-live="polite"
+          ></div>
+          <details class="researchdetails">
+            <summary>Research scope and experience decisions</summary>
+            <div class="grid2">
+              <div>
+                <h3>Included delight opportunities</h3>
+                <ol>
+                  <li>
+                    Recognize compatible existing work before requesting
+                    credentials.
+                  </li>
+                  <li>
+                    Extract JSON and connection details into editable fields.
+                  </li>
+                  <li>
+                    Suggest a starting point grounded in a visible sample
+                    schema.
+                  </li>
+                  <li>Show the resulting person, event, or spreadsheet row.</li>
+                  <li>Explain empty previews and offer a concrete recovery.</li>
+                  <li>Keep valid fields when a check fails.</li>
+                  <li>
+                    Save a credential-free draft and resume at the current step.
+                  </li>
+                  <li>
+                    Summarize changes, support undo, and invalidate older
+                    previews.
+                  </li>
+                  <li>
+                    Separate connection, preview, activation, and first-outcome
+                    evidence.
+                  </li>
+                </ol>
+              </div>
+              <div>
+                <h3>What this prototype tests</h3>
+                <p class="small">
+                  Website SDK, PostgreSQL, Salesforce source and destination,
+                  and Google Sheets destination paths share one summary, inline
+                  conversation, and current tool. The Salesforce destination
+                  includes event selection, create/update/upsert matching,
+                  explicit field references, and separate
+                  test/enable/verification states. Guided responses run locally.
+                  Account names, database rows, authorization, and completion
+                  evidence are simulated.
+                </p>
+                <p class="small">
+                  The separate SDK test website exercised real ingestion into
+                  the test workspace. A prototype completion here is not a live
+                  connection or a real import.
+                </p>
+                <p class="small">
+                  Uses Pluma's documented form, panel, text-field, and inline
+                  Agent patterns with selected light-theme tokens. This static
+                  exploration does not load production Pluma components.
+                </p>
+                <h3>Next validation questions</h3>
+                <p class="small">
+                  Can someone switch between conversation and controls without
+                  repeating information? Which choices need clarification? Is
+                  the next action apparent? Does a success state make clear what
+                  was actually verified?
+                </p>
+              </div>
+            </div>
+          </details>
+          <footer>
+            Research prototype · Nothing here connects to providers or sends
+            events. Only an explicitly saved, credential-free draft is stored in
+            this browser.
+          </footer>
+        </div>
+      </main>
+    </div>
+    <script>
+      "use strict";
+      const $ = (id) => document.getElementById(id),
+        esc = (v) =>
+          String(v ?? "").replace(
+            /[&<>"']/g,
+            (c) =>
+              ({
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;",
+              })[c],
+          );
+      const STORAGE = "cio-inline-research-draft-v1";
+      const fixture = [
+        {
+          id: "contact_101",
+          email: "alex@example.test",
+          name: "Alex Chen",
+          country: "US",
+          mailing_country: "Canada",
+          active: true,
+        },
+        {
+          id: "contact_102",
+          email: "sam@example.test",
+          name: "Sam Rivera",
+          country: "United States",
+          mailing_country: "United States",
+          active: true,
+        },
+        {
+          id: "contact_103",
+          email: "jordan@example.test",
+          name: "Jordan Bell",
+          country: "Canada",
+          mailing_country: "United States",
+          active: true,
+        },
+        {
+          id: "contact_104",
+          email: "casey@example.test",
+          name: "Casey Park",
+          country: "US",
+          mailing_country: "US",
+          active: false,
+        },
+        {
+          id: "contact_105",
+          email: "morgan@example.test",
+          name: "Morgan Lee",
+          country: "Germany",
+          mailing_country: "Germany",
+          active: true,
+        },
+        {
+          id: "contact_106",
+          email: "riley@example.test",
+          name: "Riley Green",
+          country: "United States",
+          mailing_country: "Canada",
+          active: true,
+        },
+      ];
+      const initial = () => ({
+        kind: "",
+        stage: 0,
+        connected: false,
+        connection: "existing",
+        source: "Website · Research",
+        framework: "JavaScript",
+        site: "https://example.test",
+        host: "db.example.test",
+        port: "5432",
+        database: "people",
+        username: "readonly",
+        environment: "Sandbox",
+        direction: "",
+        object: "Lead",
+        operation: "Create",
+        matchBy: "email",
+        matchValue: "alex@example.test",
+        sampleEvent: "existing",
+        lastNameMode: "event",
+        tested: false,
+        enabled: false,
+        lastName: "Chen",
+        company: "Example Research",
+        recordId: "",
+        spreadsheet:
+          "https://docs.google.com/spreadsheets/d/research-example/edit",
+        sheet: "Demo requests",
+        rowKey: "event_id",
+        event: "Demo Requested",
+        personId: "customer_id",
+        country: "all",
+        countryField: "",
+        activeOnly: false,
+        frequency: "Manual",
+        idField: "id",
+        previewed: false,
+        proof: false,
+        proofTime: "",
+        savedAt: "",
+      });
+      let state = initial(),
+        history = [],
+        messages = [],
+        latestChange = "",
+        savedDraft = null;
+      const names = {
+        sdk: "JavaScript",
+        postgres: "PostgreSQL",
+        salesforce: "Salesforce",
+        sheets: "Google Sheets",
+      };
+      const isSalesforceDestination = () =>
+        state.kind === "salesforce" && state.direction === "out";
+      const isRecords = () =>
+        state.kind === "postgres" ||
+        (state.kind === "salesforce" && !isSalesforceDestination());
+      const steps = () =>
+        state.kind === "sdk"
+          ? ["Connection", "Installation", "Preview", "Outcome"]
+          : ["Connection", "Data", "Preview", "Outcome"];
+      function clearEvidence() {
+        state.tested = false;
+        state.enabled = false;
+        state.previewed = false;
+        state.proof = false;
+        state.proofTime = "";
+      }
+      function checkpoint() {
+        history.push(structuredClone(state));
+        if (history.length > 20) history.shift();
+      }
+      function change(patch, description) {
+        checkpoint();
+        if ("direction" in patch && patch.direction !== state.direction)
+          patch.connected = false;
+        Object.assign(state, patch);
+        clearEvidence();
+        if (!state.connected) state.stage = 0;
+        else if (state.stage > 1) state.stage = 1;
+        latestChange = description;
+        render();
+      }
+      function say(text) {
+        messages.push({ who: "The Agent", text });
+        renderThread();
+      }
+      function renderThread() {
+        $("toggle-thread").hidden = !messages.length;
+        $("thread").innerHTML = messages
+          .slice(-8)
+          .map(
+            (m) =>
+              '<div class="message ' +
+              (m.who === "You" ? "you" : "theagent") +
+              '"><strong>' +
+              m.who +
+              "</strong>" +
+              esc(m.text) +
+              "</div>",
+          )
+          .join("");
+        $("thread").scrollTop = $("thread").scrollHeight;
+      }
+      function status(t) {
+        $("status").textContent = t;
+      }
+      function hint() {
+        if (!state.kind)
+          return "Tell me the outcome you want. A rough idea is enough, and you can add connection details or use the form along the way.";
+        if (state.stage === 0)
+          return {
+            sdk: "There is a compatible website source in this sample workspace. Reuse it, or start a separate connection.",
+            postgres:
+              "Use the sample read-only connection, or fill in the same fields from sample JSON. Your data choices stay with the draft.",
+            salesforce: !state.direction
+              ? "What do you want to do with Salesforce? Bring contacts into Customer.io, or send records to Salesforce?"
+              : isSalesforceDestination()
+                ? "Choose the Salesforce environment, then inspect the record operation and its required fields."
+                : "Choose the Salesforce environment, then authorize the sample account. The next screen will use that account’s available fields.",
+            sheets:
+              "Connect the sample Google account. Then choose the spreadsheet, tab, and how a row is matched.",
+          }[state.kind];
+        if (state.stage === 1)
+          return {
+            sdk: "The connection is selected. Now choose the installation path and describe the first event you want to track.",
+            postgres:
+              state.country !== "all" && !state.countryField
+                ? "The sample has two country fields. Which one describes the contacts you mean? I will use that choice for the query and preview."
+                : "The sample schema is available. Review the suggested query, identity, and cadence together.",
+            salesforce: isSalesforceDestination()
+              ? "Choose a record and operation. The sample account exposes the fields required for that action."
+              : state.country !== "all" && !state.countryField
+                ? "The sample Salesforce account has Contact Country and Mailing Country. Choose the meaning before applying the filter."
+                : "Start with Contacts. Choose which fields matter and inspect the resulting profiles before enabling anything.",
+            sheets:
+              "A spreadsheet URL supplies the document ID. Choose the tab and a stable row key so retries update the same request.",
+          }[state.kind];
+        if (state.stage === 2)
+          return "Here is the resulting shape and the evidence behind it. Change a field or ask for an adjustment; the preview will become due for another check.";
+        if (state.stage === 3 && state.enabled && !state.proof)
+          return "Enabled in this simulation. The first automatic outcome still needs its own evidence.";
+        if (state.stage === 3 && state.tested && !state.enabled)
+          return "The sample test passed. Automatic forwarding is still paused until you choose to enable it.";
+        return state.proof
+          ? "The sample outcome is verified for this run. In the product, the same state must come from recent source or destination evidence."
+          : "The configuration is ready for a sample check. Previewing data is separate from a successful first outcome.";
+      }
+      function field(id, label, value, help = "", type = "text") {
+        return (
+          '<div class="field"><label for="' +
+          id +
+          '">' +
+          label +
+          '</label><input id="' +
+          id +
+          '" name="' +
+          id +
+          '" type="' +
+          type +
+          '" value="' +
+          esc(value) +
+          '" ' +
+          (type === "number" ? 'min="1" max="65535"' : "") +
+          ' aria-describedby="' +
+          id +
+          "-help " +
+          id +
+          '-error" autocomplete="off" data-1p-ignore><div id="' +
+          id +
+          '-help" class="help">' +
+          help +
+          '</div><div id="' +
+          id +
+          '-error" class="error" role="alert"></div></div>'
+        );
+      }
+      function select(id, label, value, options, help = "") {
+        return (
+          '<div class="field"><label for="' +
+          id +
+          '">' +
+          label +
+          '</label><select id="' +
+          id +
+          '" aria-describedby="' +
+          id +
+          "-help " +
+          id +
+          '-error">' +
+          options
+            .map((o) => {
+              let [v, l] = Array.isArray(o) ? o : [o, o];
+              return (
+                '<option value="' +
+                esc(v) +
+                '" ' +
+                (v === value ? "selected" : "") +
+                ">" +
+                esc(l) +
+                "</option>"
+              );
+            })
+            .join("") +
+          '</select><div id="' +
+          id +
+          '-help" class="help">' +
+          help +
+          '</div><div id="' +
+          id +
+          '-error" class="error" role="alert"></div></div>'
+        );
+      }
+      function error(id, text) {
+        let el = $(id);
+        if (el) el.setAttribute("aria-invalid", "true");
+        let out = $(id + "-error");
+        if (out) out.textContent = text;
+      }
+      function render() {
+        $("status").textContent = "";
+        $("starters").hidden = !!state.kind;
+        $("agent-message").textContent = hint();
+        $("changebar").hidden = !history.length;
+        $("change-text").textContent = latestChange;
+        $("save-draft").disabled = !state.kind;
+        $("summary").innerHTML = !state.kind
+          ? '<div class="summaryempty"><span class="roundicon" aria-hidden="true">⇄</span><div><h3>Setup details</h3><p class="small">Your goal and choices will appear here as you go.</p></div></div>'
+          : '<div class="actions" style="justify-content:space-between"><h3>Setup details</h3><span class="pill">' +
+            (state.proof
+              ? "Sample verified"
+              : state.enabled
+                ? "Enabled · Simulated"
+                : state.tested
+                  ? "Test accepted · Paused"
+                  : state.previewed
+                    ? "Sample preview"
+                    : state.connected
+                      ? "Access checked · Sample"
+                      : "Draft") +
+            "</span></div><dl><div><dt>Integration</dt><dd>" +
+            (state.kind === "salesforce" && !state.direction
+              ? 'Salesforce <span class="small">· Outcome pending</span>'
+              : state.kind === "sheets" || isSalesforceDestination()
+                ? 'Customer.io <span class="small">→</span> ' +
+                  names[state.kind]
+                : names[state.kind] +
+                  ' <span class="small">→ Customer.io</span>') +
+            "</dd></div><div><dt>Goal</dt><dd>" +
+            esc(goal()) +
+            "</dd></div><div><dt>Connection</dt><dd>" +
+            esc(
+              state.kind === "postgres"
+                ? state.database
+                : state.kind === "salesforce"
+                  ? state.environment
+                  : state.kind === "sheets"
+                    ? "Google · Research account"
+                    : state.source,
+            ) +
+            "</dd></div><div><dt>Next step</dt><dd>" +
+            esc(state.proof ? "Inspect the evidence" : steps()[state.stage]) +
+            "</dd></div></dl>";
+        let body = "";
+        if (!state.kind) {
+          body =
+            '<section class="panel"><div class="panelhead"><h2>Integration</h2><span class="small">Or choose directly</span></div><div class="section choicegrid">' +
+            [
+              [
+                "sdk",
+                "Website SDK",
+                "Track page visits and product events",
+                "⌘",
+              ],
+              ["postgres", "PostgreSQL", "Sync people from your database", "▤"],
+              [
+                "salesforce",
+                "Salesforce",
+                "Bring contacts in or send CRM records out",
+                "☁",
+              ],
+              [
+                "sheets",
+                "Google Sheets",
+                "Send events to spreadsheet rows",
+                "▦",
+              ],
+            ]
+              .map(
+                ([k, t, d, i]) =>
+                  '<button class="choice" data-kind="' +
+                  k +
+                  '"><span class="roundicon" aria-hidden="true">' +
+                  i +
+                  '</span><span><span class="title">' +
+                  t +
+                  "</span><small>" +
+                  d +
+                  "</small></span></button>",
+              )
+              .join("") +
+            "</div></section>";
+        } else {
+          body =
+            '<ol class="stepper" aria-label="Setup progress">' +
+            steps()
+              .map(
+                (s, i) =>
+                  '<li class="' +
+                  (i < state.stage ? "done" : "") +
+                  '" ' +
+                  (i === state.stage ? 'aria-current="step"' : "") +
+                  '><button data-stage="' +
+                  i +
+                  '" ' +
+                  (i > state.stage ? "disabled" : "") +
+                  '><span class="coin" aria-hidden="true">' +
+                  (i < state.stage ? "✓" : i + 1) +
+                  "</span>" +
+                  s +
+                  "</button></li>",
+              )
+              .join("") +
+            "</ol>";
+          body +=
+            state.stage === 0
+              ? connectionPanel()
+              : state.stage === 1
+                ? dataPanel()
+                : state.stage === 2
+                  ? previewPanel()
+                  : outcomePanel();
+        }
+        if (state.kind)
+          $("summary").insertAdjacentHTML(
+            "beforeend",
+            '<div class="actions summaryedits"><button data-edit="0" class="quiet">Edit connection</button>' +
+              (state.connected
+                ? '<button data-edit="1" class="quiet">Edit data choices</button>'
+                : "") +
+              "</div>",
+          );
+        $("stage-root").innerHTML = body;
+        renderThread();
+        bindStage();
+      }
+      function goal() {
+        if (isSalesforceDestination())
+          return (
+            state.event +
+            " → " +
+            (state.operation === "Upsert"
+              ? "create or update"
+              : state.operation.toLowerCase()) +
+            " " +
+            state.object.toLowerCase() +
+            "s"
+          );
+        return state.kind === "salesforce" && !state.direction
+          ? "Choose an outcome"
+          : isSalesforceDestination()
+            ? state.operation + " " + state.object + " records"
+            : state.kind === "sdk"
+              ? "Track " + state.event
+              : state.kind === "sheets"
+                ? state.event + " → spreadsheet"
+                : (state.country === "us"
+                    ? "US contacts"
+                    : state.country === "ca"
+                      ? "Canadian contacts"
+                      : state.country === "empty"
+                        ? "Contacts in Japan"
+                        : "Contacts") +
+                  (state.activeOnly ? " · Active only" : "");
+      }
+      function connectionPanel() {
+        let c = "";
+        if (state.kind === "sdk")
+          c =
+            '<div class="connection"><span class="roundicon" aria-hidden="true">⌘</span><div class="fill"><strong>Website · Research</strong><p>JavaScript source · US workspace · Sample existing connection</p></div><span class="pill positive">Available</span></div>' +
+            select("connection", "Source choice", state.connection, [
+              ["existing", "Reuse Website · Research"],
+              ["new", "Create a separate source"],
+            ]) +
+            field(
+              "site",
+              "Website URL",
+              state.site,
+              "Used to open and test the installation.",
+            );
+        if (state.kind === "postgres")
+          c =
+            '<div class="connection"><span class="roundicon" aria-hidden="true">▤</span><div class="fill"><strong>People · Read-only replica</strong><p>PostgreSQL · people database · Sample existing connection</p></div><span class="pill positive">Available</span></div>' +
+            select("connection", "Connection choice", state.connection, [
+              ["existing", "Reuse People · Read-only replica"],
+              ["new", "Use sample connection details"],
+            ]) +
+            (state.connection === "new"
+              ? '<div class="grid2">' +
+                field("host", "Host", state.host) +
+                field("port", "Port", state.port, "", "number") +
+                field("database", "Database name", state.database) +
+                field("username", "Username", state.username) +
+                '</div><p class="small">This research page uses sample connection details. Real passwords belong in the secure Customer.io connection form.</p>'
+              : '<p class="small">The saved sample connection includes the database details. There is nothing to enter again.</p>');
+        if (state.kind === "salesforce")
+          c =
+            select(
+              "direction",
+              "Outcome",
+              state.direction,
+              [
+                ["", "Choose an outcome"],
+                ["in", "Bring Salesforce contacts into Customer.io"],
+                ["out", "Send Customer.io data to Salesforce"],
+              ],
+              "The outcome determines the access and fields needed.",
+            ) +
+            select("environment", "Environment", state.environment, [
+              "Sandbox",
+              "Production",
+            ]) +
+            '<div class="note">' +
+            (!state.direction
+              ? "Choose an outcome to view its authorization requirements."
+              : isSalesforceDestination()
+                ? "The selected organization and record operation determine the required fields. This sample simulates authorization; account-specific validation must be checked against the real organization."
+                : "The source flow requires an administrator to install the Customer.io External Client App before authorization. This sample simulates that handoff and does not request access.") +
+            '</div><div class="connection"><span class="roundicon" aria-hidden="true">☁</span><div><strong>Research organization</strong><p>Sample account · Authorization has not been checked</p></div></div>';
+        if (state.kind === "sheets")
+          c =
+            '<div class="connection"><span class="roundicon" aria-hidden="true">▦</span><div><strong>Google · Research account</strong><p>Sample account with access to the Demo requests spreadsheet</p></div></div><p>Authorization establishes account access. The next step checks the particular spreadsheet and tab.</p>';
+        return (
+          '<section class="panel"><div class="panelhead"><h2>Connection</h2><span class="pill">Sample data</span></div><form id="connection-form"><div class="section">' +
+          c +
+          '<div class="error" id="connection-error" role="alert"></div></div><div class="formfoot"><p>Nothing starts syncing at this step.</p><button class="primary" type="submit">' +
+          (state.kind === "salesforce" || state.kind === "sheets"
+            ? "Simulate authorization"
+            : state.connection === "existing"
+              ? "Use connection"
+              : "Check sample connection") +
+          "</button></div></form></section>"
+        );
+      }
+      function query() {
+        if (state.country !== "all" && !state.countryField)
+          return "Choose a country field to generate the filter.";
+        let field = state.countryField || "country";
+        let terms = [];
+        if (state.country === "us")
+          terms.push('"' + field + "\" IN ('US', 'United States')");
+        if (state.country === "ca") terms.push('"' + field + "\" = 'Canada'");
+        if (state.country === "empty") terms.push('"' + field + "\" = 'Japan'");
+        if (state.activeOnly) terms.push('"active" = true');
+        return (
+          'SELECT "id", "email", "name", "country", "mailing_country"\nFROM "contacts"' +
+          (terms.length ? "\nWHERE " + terms.join("\n  AND ") : "") +
+          "\nLIMIT 20;"
+        );
+      }
+      function rows() {
+        return fixture.filter(
+          (r) =>
+            (state.country === "all" ||
+              (state.country === "us"
+                ? ["US", "United States"]
+                : state.country === "ca"
+                  ? ["Canada"]
+                  : ["Japan"]
+              ).includes(r[state.countryField || "country"])) &&
+            (!state.activeOnly || r.active),
+        );
+      }
+      function dataPanel() {
+        if (isSalesforceDestination()) return destinationForm();
+        let c = "",
+          title =
+            state.kind === "sdk"
+              ? "Installation and events"
+              : state.kind === "sheets"
+                ? "Spreadsheet rows"
+                : isSalesforceDestination()
+                  ? "CRM record"
+                  : "Contacts and filters";
+        if (state.kind === "sdk")
+          c =
+            '<div class="split"><div>' +
+            select("framework", "Website framework", state.framework, [
+              "JavaScript",
+              "React",
+              "Next.js",
+            ]) +
+            field(
+              "event",
+              "Event name",
+              state.event,
+              "Use the action people perform in your product.",
+            ) +
+            field(
+              "personId",
+              "Person identifier",
+              state.personId,
+              "Identify after login with a stable ID from your application.",
+            ) +
+            '</div><div><h3>Installation paths</h3><p class="small">Both paths use the same source and event choices.</p><div class="connection"><div><strong>Work with a coding agent</strong><p>Use the current source’s generated setup instructions.</p><button type="button" id="handoff">Simulate handoff</button></div></div><div class="connection"><div><strong>Set up directly</strong><p>Install once, send page activity, identify after login, then track the action.</p><a href="customerio-sdk-setup.html" target="_blank" rel="noopener">Open SDK test website ↗</a></div></div><p id="handoff-status" class="small"></p></div></div>';
+        if (state.kind === "sheets")
+          c =
+            field(
+              "spreadsheet",
+              "Spreadsheet URL or ID",
+              state.spreadsheet,
+              "The document ID is extracted from a Google Sheets URL.",
+            ) +
+            '<div class="grid2">' +
+            select("sheet", "Worksheet", state.sheet, [
+              "Demo requests",
+              "Archive",
+            ]) +
+            select(
+              "rowKey",
+              "Row identifier",
+              state.rowKey,
+              ["event_id", "email"],
+              "A matching key updates the existing row; a new key adds a row.",
+            ) +
+            "</div>" +
+            field(
+              "event",
+              "Event",
+              state.event,
+              "Choose the incoming action that should become a row.",
+            ) +
+            '<div class="note">Suggested mapping: event ID → event_id, email → email, interest → interest. This sample uses the accessible Demo requests document.</div>';
+        if (isRecords())
+          c =
+            '<div class="split"><div><div class="note">Sample ' +
+            (state.kind === "postgres" ? "schema" : "account fields") +
+            ': contacts · id, email, name, country, mailing_country, active. These are fixture fields, not a discovery of your test database.</div><div class="grid2">' +
+            select("country", "Contact filter", state.country, [
+              ["all", "All countries"],
+              ["us", "United States"],
+              ["ca", "Canada"],
+              ["empty", "Japan · Empty sample"],
+            ]) +
+            select(
+              "countryField",
+              "Country meaning",
+              state.countryField,
+              [
+                ["", "Choose a country field"],
+                ["country", "Contact country"],
+                ["mailing_country", "Mailing country"],
+              ],
+              "These fields return different people in this sample.",
+            ) +
+            '</div><label class="checkbox"><input id="activeOnly" type="checkbox" ' +
+            (state.activeOnly ? "checked" : "") +
+            '> Include active contacts only</label><div class="grid2">' +
+            select("idField", "Profile identifier", state.idField, [
+              "id",
+              "email",
+            ]) +
+            select(
+              "frequency",
+              "Sync schedule",
+              state.frequency,
+              ["Manual", "Hourly", "Daily"],
+              "Manual is suggested until the first preview is checked.",
+            ) +
+            "</div></div><div><h3>" +
+            (state.kind === "postgres" ? "Suggested SQL" : "Filter meaning") +
+            '</h3><p class="small">' +
+            (state.kind === "postgres"
+              ? "Generated from the sample fields and visible choices. No query runs against a real database."
+              : "The selected country field controls which sample contacts match.") +
+            '</p><pre class="code" id="query-preview">' +
+            esc(query()) +
+            '</pre><button type="button" id="explain-query">Explain selection</button></div></div>';
+        return (
+          '<section class="panel"><div class="panelhead"><h2>' +
+          title +
+          '</h2><span class="pill">Editable draft</span></div><form id="data-form"><div class="section">' +
+          c +
+          '<div class="error" id="data-error" role="alert"></div></div><div class="formfoot"><button type="button" id="back">Back</button><button type="submit" class="primary">Preview sample</button></div></form></section>'
+        );
+      }
+      function resultObject() {
+        if (isSalesforceDestination()) return salesforceResult();
+        if (state.kind === "sdk")
+          return {
+            type: "track",
+            userId: "research_person_101",
+            event: state.event,
+            properties: { interest: "Integration setup", research_test: true },
+          };
+        if (state.kind === "sheets")
+          return {
+            id: state.rowKey === "event_id" ? "demo_101" : "alex@example.test",
+            event_id: "demo_101",
+            email: "alex@example.test",
+            interest: "Integration setup",
+            research_test: "true",
+          };
+        let r = rows()[0];
+        return r
+          ? {
+              id: r[state.idField],
+              email: r.email,
+              name: r.name,
+              country: r.country,
+            }
+          : null;
+      }
+      function table() {
+        let data = rows();
+        return (
+          '<div class="tablewrap"><table><caption>' +
+          data.length +
+          " of " +
+          fixture.length +
+          ' sample contacts match · Up to 20 rows</caption><thead><tr><th scope="col">ID</th><th scope="col">Email</th><th scope="col">Contact country</th><th scope="col">Mailing country</th></tr></thead><tbody>' +
+          data
+            .map(
+              (r) =>
+                "<tr><td>" +
+                r.id +
+                "</td><td>" +
+                r.email +
+                "</td><td>" +
+                r.country +
+                "</td><td>" +
+                r.mailing_country +
+                "</td></tr>",
+            )
+            .join("") +
+          "</tbody></table></div>"
+        );
+      }
+      function previewPanel() {
+        if (isSalesforceDestination()) return destinationPreview();
+        let db = isRecords(),
+          count = db ? rows().length : 1;
+        let c = db
+          ? count
+            ? table()
+            : '<div class="empty"><h3>No sample contacts match</h3><p>The connection is available. The selected country filter returns no rows in the fixture.</p><button id="remove-filter">Preview all countries</button></div>'
+          : '<div class="note">' +
+            (state.kind === "sdk"
+              ? "Page activity → identified person → " +
+                esc(state.event) +
+                ". These are separate checks."
+              : isSalesforceDestination()
+                ? "The " +
+                  esc(state.operation.toLowerCase()) +
+                  " operation will affect one sample " +
+                  esc(state.object.toLowerCase()) +
+                  " record. No real record will be written."
+                : "Upsert Sheet adds a dedicated id column for the selected row identifier. New keys add rows; a repeated " +
+                  esc(state.rowKey) +
+                  " updates the matching row. The sample research_test value is written as text.") +
+            "</div>";
+        return (
+          '<section class="panel"><div class="panelhead"><h2>Result preview</h2><span class="pill">Sample data</span></div><div class="section">' +
+          c +
+          '<div class="split" style="margin-top:24px"><div><h3>' +
+          esc(
+            state.kind === "sheets"
+              ? "Resulting row"
+              : state.kind === "sdk"
+                ? "Resulting event"
+                : isSalesforceDestination()
+                  ? "Resulting record"
+                  : "Resulting profile",
+          ) +
+          '</h3><pre class="code">' +
+          esc(JSON.stringify(resultObject(), null, 2)) +
+          '</pre></div><div><h3>Setup choices</h3><dl class="reviewlist"><div><dt>Connection</dt><dd>' +
+          esc(names[state.kind]) +
+          " · Sample workspace</dd></div><div><dt>Identity</dt><dd>" +
+          esc(
+            state.kind === "sdk"
+              ? state.personId
+              : state.kind === "sheets"
+                ? state.rowKey
+                : isSalesforceDestination()
+                  ? state.operation === "Create"
+                    ? "New Salesforce record"
+                    : state.recordId
+                  : state.idField,
+          ) +
+          "</dd></div><div><dt>Behavior</dt><dd>" +
+          esc(
+            state.kind === "sdk"
+              ? "One initial page event; identify after login"
+              : state.kind === "sheets"
+                ? "Add or update a row in " + state.sheet
+                : isSalesforceDestination()
+                  ? state.operation + " " + state.object
+                  : state.frequency + " sync · Create or update profiles",
+          ) +
+          '</dd></div><div><dt>Evidence</dt><dd>Fixture preview only. Nothing has been sent or activated.</dd></div></dl></div></div></div><div class="formfoot"><button id="back">Edit choices</button><button id="review" class="primary" ' +
+          (!count ? "disabled" : "") +
+          ">Review outcome</button></div></section>"
+        );
+      }
+
+      const samples = {
+        existing: {
+          type: "track",
+          event: "Demo Requested",
+          userId: "person_101",
+          properties: {
+            email: "alex@example.test",
+            last_name: "Chen",
+            company: "Example Research",
+            interest: "Integration setup",
+          },
+        },
+        new: {
+          type: "track",
+          event: "Demo Requested",
+          userId: "person_102",
+          properties: {
+            email: "sam@example.test",
+            last_name: "Rivera",
+            company: "Sample Studio",
+            interest: "Integration setup",
+          },
+        },
+        ambiguous: {
+          type: "track",
+          event: "Demo Requested",
+          userId: "person_103",
+          properties: {
+            email: "shared@example.test",
+            last_name: "Bell",
+            company: "Example Research",
+            interest: "Integration setup",
+          },
+        },
+      };
+      const crmFixture = [
+        {
+          Id: "003000000000101",
+          Email: "alex@example.test",
+          LastName: "Chen",
+          Company: "Example Research",
+        },
+        {
+          Id: "003000000000102",
+          Email: "shared@example.test",
+          LastName: "Bell",
+          Company: "Example Research",
+        },
+        {
+          Id: "003000000000103",
+          Email: "shared@example.test",
+          LastName: "Park",
+          Company: "Example Research",
+        },
+      ];
+      function inputEvent() {
+        return { ...samples[state.sampleEvent], event: state.event };
+      }
+      function matchingRecords() {
+        return crmFixture
+          .map((r) => ({
+            ...r,
+            Id: (state.object === "Lead" ? "00Q" : "003") + r.Id.slice(3),
+          }))
+          .filter((r) =>
+            state.matchBy === "recordId"
+              ? r.Id === state.recordId
+              : r.Email.toLowerCase() === state.matchValue.trim().toLowerCase(),
+          );
+      }
+      function matchProblem() {
+        if (state.operation === "Create") return "";
+        let count = matchingRecords().length;
+        if (count > 1)
+          return "Two sample records match. Nothing will be changed. Choose a unique email or record ID.";
+        if (count === 0 && state.operation === "Update")
+          return "No sample record matches. Update would change nothing. Choose another identifier, or allow creation when no match exists.";
+        return "";
+      }
+      function matchMeaning() {
+        if (state.operation === "Create")
+          return "Create a new record for every matching event. Repeated requests can create duplicates.";
+        let count = matchingRecords().length;
+        if (matchProblem()) return matchProblem();
+        return count === 1
+          ? "One sample record matches. Update that record; keep its Salesforce identity."
+          : "No sample record matches. Create a new record because you selected create or update.";
+      }
+      function salesforceResult() {
+        const e = inputEvent(),
+          matches = matchingRecords();
+        return {
+          object: state.object,
+          operation:
+            state.operation === "Create"
+              ? "create"
+              : matches.length === 1
+                ? "update"
+                : matches.length > 1
+                  ? "blocked"
+                  : state.operation === "Upsert"
+                    ? "create"
+                    : "no match",
+          ...(state.operation !== "Create"
+            ? {
+                match: {
+                  field: state.matchBy === "email" ? "Email" : "Id",
+                  value:
+                    state.matchBy === "email"
+                      ? state.matchValue
+                      : state.recordId,
+                  count: matches.length,
+                },
+              }
+            : {}),
+          fields: {
+            ...(state.operation !== "Create" && matches.length === 1
+              ? { Id: matches[0].Id }
+              : {}),
+            Email: e.properties.email,
+            LastName:
+              state.lastNameMode === "event"
+                ? e.properties.last_name
+                : state.lastName,
+            ...(state.object === "Lead" ? { Company: state.company } : {}),
+          },
+        };
+      }
+      function destinationForm() {
+        const e = inputEvent(),
+          needsMatch = state.operation !== "Create";
+        return `<section class="panel"><div class="panelhead"><h2>Send demo requests to Salesforce</h2><span class="pill">Sample organization</span></div>
+          <form id="data-form"><div class="section">
+          <div class="grid2">${select("source", "Incoming source", state.source, ["Website · Research", "Backend · Research"])}${field("event", "Trigger event", state.event, "Only events with this name run the action.")}</div>
+          <div class="grid2">${select("object", "Salesforce record type", state.object, ["Lead", "Contact"])}${select(
+            "operation",
+            "Record behavior",
+            state.operation,
+            [
+              ["Create", "Create a new record"],
+              ["Update", "Update an existing record"],
+              ["Upsert", "Create or update a record"],
+            ],
+          )}</div>
+          ${select(
+            "sampleEvent",
+            "Sample event",
+            state.sampleEvent,
+            [
+              ["existing", "Demo request · Existing person"],
+              ["new", "Demo request · New person"],
+              ["ambiguous", "Demo request · Shared email"],
+            ],
+            "Synthetic events let you inspect matching before anything runs.",
+          )}
+          ${
+            needsMatch
+              ? `<div class="grid2">${select(
+                  "matchBy",
+                  "Match Salesforce records by",
+                  state.matchBy,
+                  [
+                    ["email", "Email address"],
+                    ["recordId", "Salesforce record ID"],
+                  ],
+                )}${state.matchBy === "email" ? field("matchValue", "Email to match", state.matchValue, "Starts from the selected sample event. Edit to inspect another match.") : field("recordId", "Salesforce record ID", state.recordId, "Use " + (state.object === "Lead" ? "00Q" : "003") + "000000000101 for the unique fixture record.")}</div><div class="note" id="match-explanation">${esc(matchMeaning())}</div>`
+              : `<div class="note">${esc(matchMeaning())}</div>`
+          }
+          <h3>Fields to send</h3><div class="mappingrow"><div><strong>Email</strong><p class="small">From event · properties.email</p></div><code>${esc(e.properties.email)}</code></div>
+          <div class="grid2">${select(
+            "lastNameMode",
+            "Last name value",
+            state.lastNameMode,
+            [
+              ["event", "From event · properties.last_name"],
+              ["fixed", "Use a fixed value"],
+            ],
+            "Event fields resolve for each request. Fixed values stay the same.",
+          )}${state.lastNameMode === "fixed" ? field("lastName", "Fixed last name", state.lastName, "Sent literally for every matching event.") : `<div class="mappingrow"><div><strong>Sample last name</strong><p class="small">Resolved from this event</p></div><code>${esc(e.properties.last_name)}</code></div>`}</div>
+          ${state.object === "Lead" ? field("company", "Company", state.company, "Fixed value in this sample. Required when creating a lead.") : ""}
+          <details><summary>View sample event and account requirements</summary><pre class="code">${esc(JSON.stringify(e, null, 2))}</pre><p class="small">Research organization · ${esc(state.environment)}. This fixture supports Leads and Contacts. Real accounts may require custom fields, record types, or additional permissions. All matching here uses synthetic records.</p></details>
+          <div class="error" id="data-error" role="alert"></div></div><div class="formfoot"><button id="back" type="button">Back</button><button class="primary" type="submit">Preview record</button></div></form></section>`;
+      }
+      function destinationPreview() {
+        const problem = matchProblem(),
+          result = salesforceResult();
+        return `<section class="panel"><div class="panelhead"><h2>What will happen</h2><span class="pill">Local preview · Sample data</span></div><div class="section">
+          <div class="note"><strong>${esc(state.source)} → ${esc(state.event)} → Salesforce ${esc(state.object)}</strong><br>${esc(matchMeaning())}</div>
+          ${problem ? `<div class="error" role="alert">${esc(problem)}</div><div class="actions">${matchingRecords().length === 0 ? '<button id="use-upsert">Allow create or update</button>' : '<button id="fix-match">Use a unique sample email</button>'}</div>` : ""}
+          <div class="split"><div><h3>Incoming event</h3><pre class="code">${esc(JSON.stringify(inputEvent(), null, 2))}</pre></div><div><h3>Resulting record${problem ? " · Blocked" : ""}</h3><pre class="code">${esc(JSON.stringify(result, null, 2))}</pre></div></div>
+          <dl class="reviewlist"><div><dt>Record behavior</dt><dd>${esc(state.operation)}</dd></div><div><dt>Last name</dt><dd>${state.lastNameMode === "event" ? "From event · properties.last_name" : "Fixed value · " + esc(state.lastName)}</dd></div><div><dt>Automatic forwarding</dt><dd>Paused. Neither authorization nor a preview starts an action.</dd></div><div><dt>Evidence</dt><dd>This is a fixture transformation and fixture match. Salesforce has not received a test.</dd></div></dl>
+          </div><div class="formfoot"><button id="back">Edit choices</button><button id="review" class="primary" ${problem ? "disabled" : ""}>Review and test</button></div></section>`;
+      }
+      function outcomePanel() {
+        const destination =
+          isSalesforceDestination() || state.kind === "sheets";
+        const outcome =
+          state.kind === "sdk"
+            ? state.event + " received"
+            : state.kind === "sheets"
+              ? "Spreadsheet row accepted"
+              : isSalesforceDestination()
+                ? "CRM record accepted"
+                : "First sync completed";
+        const runLabel = destination
+          ? "Enable automatic forwarding"
+          : state.kind === "sdk"
+            ? "Mark installation ready"
+            : "Enable sync";
+        return `<section class="panel"><div class="panelhead"><h2>Test, then make it live</h2><span class="pill ${state.proof ? "positive" : ""}">${state.proof ? "Sample verified" : state.enabled ? "Enabled · Simulated" : "Paused"}</span></div><div class="section">
+          ${state.proof ? `<div class="successbox"><span class="successicon" aria-hidden="true">✓</span><div><h3>${esc(outcome)} · Simulated</h3><p class="small">Sample run at ${esc(new Date(state.proofTime).toLocaleTimeString())}. No provider connection, import, or delivery occurred.</p></div></div>` : ""}
+          <dl class="reviewlist"><div><dt>Goal</dt><dd>${esc(goal())}</dd></div><div><dt>Behavior</dt><dd>${isSalesforceDestination() ? esc(matchMeaning()) : state.kind === "sheets" ? "A repeated " + esc(state.rowKey) + " updates the same worksheet row." : state.kind === "sdk" ? "Send page activity, identify after login, and track the chosen event." : esc(state.frequency) + " sync using the reviewed selection."}</dd></div><div><dt>When it starts</dt><dd>${destination ? "When enabled, future matching events are forwarded. This sample does not replay history." : state.kind === "sdk" ? "When the installation is ready and the application sends events." : "When enabled, run the selected " + esc(state.frequency.toLowerCase()) + " schedule. Previewing does not import profiles."}</dd></div></dl>
+          <ol class="evidenceSteps"><li><div><h3>1. Test the current setup</h3><p class="small">${destination ? "In the real product, this sends one test to the destination and can create or update a real record. Here it only simulates acceptance." : "Check the sample configuration. This simulation does not run code or import data."}</p></div><button id="test" ${state.tested ? "disabled" : ""}>${state.tested ? "Sample test accepted" : "Simulate test"}</button></li>
+          <li><div><h3>2. ${runLabel}</h3><p class="small">A successful test leaves the setup paused. Enabling is a separate choice.</p></div><button id="activate" ${!state.tested || state.enabled ? "disabled" : ""}>${state.enabled ? "Enabled · Simulated" : "Simulate enable"}</button></li>
+          <li><div><h3>3. Verify the first automatic outcome</h3><p class="small">${state.enabled ? "Enabled does not yet prove delivery. Check a result from the current configuration." : "Available after enabling. A manual test is separate from automatic delivery."}</p></div><button id="verify" class="primary" ${!state.enabled || state.proof ? "disabled" : ""}>${state.proof ? "Sample verified" : "Simulate first outcome"}</button></li></ol>
+          ${state.enabled ? '<button id="pause">Pause sample setup</button>' : ""}
+          <div class="note">Settings saved → access checked → preview checked → test accepted → enabled → first outcome verified. Each state needs its own evidence. All evidence on this page is simulated.</div>
+          ${state.kind === "sdk" ? '<a href="customerio-sdk-setup.html" target="_blank" rel="noopener">Open the separate live SDK test website ↗</a>' : ""}
+          </div><div class="formfoot"><button id="back">Back to preview</button><span class="small">Changing the draft pauses the simulation and clears old checks.</span></div></section>`;
+      }
+      function bindStage() {
+        document.querySelectorAll("[data-edit]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              state.stage = Number(b.dataset.edit);
+              render();
+            }),
+        );
+        if ($("use-upsert"))
+          $("use-upsert").onclick = () =>
+            change(
+              { operation: "Upsert" },
+              "Changed to create or update. Your event and mappings are preserved.",
+            );
+        if ($("fix-match"))
+          $("fix-match").onclick = () =>
+            change(
+              { matchValue: "alex@example.test" },
+              "Selected a unique sample email. Review the match before testing.",
+            );
+        if ($("test"))
+          $("test").onclick = () => {
+            if (
+              !state.previewed ||
+              !state.connected ||
+              (isSalesforceDestination() && matchProblem())
+            )
+              return;
+            checkpoint();
+            state.tested = true;
+            state.enabled = false;
+            state.proof = false;
+            latestChange =
+              "Sample test accepted. Automatic forwarding is still paused.";
+            render();
+            status("Simulated test accepted. No real data was sent.");
+          };
+        if ($("activate"))
+          $("activate").onclick = () => {
+            if (!state.tested || !state.previewed || !state.connected) return;
+            checkpoint();
+            state.enabled = true;
+            state.proof = false;
+            latestChange =
+              "Enabled in this simulation. First automatic outcome is not verified yet.";
+            render();
+          };
+        if ($("pause"))
+          $("pause").onclick = () => {
+            checkpoint();
+            state.enabled = false;
+            state.proof = false;
+            state.proofTime = "";
+            render();
+            status("Paused in this simulation. Setup choices are preserved.");
+          };
+        document
+          .querySelectorAll("[data-kind]")
+          .forEach((b) => (b.onclick = () => choose(b.dataset.kind)));
+        document.querySelectorAll("[data-stage]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              state.stage = Number(b.dataset.stage);
+              render();
+            }),
+        );
+        let f = $("connection-form");
+        if (f)
+          f.onsubmit = (e) => {
+            e.preventDefault();
+            connect();
+          };
+        let d = $("data-form");
+        if (d)
+          d.onsubmit = (e) => {
+            e.preventDefault();
+            preview();
+          };
+        if ($("back"))
+          $("back").onclick = () => {
+            state.stage = Math.max(0, state.stage - 1);
+            render();
+          };
+        if ($("review"))
+          $("review").onclick = () => {
+            state.stage = 3;
+            render();
+          };
+        if ($("verify"))
+          $("verify").onclick = () => {
+            if (!state.previewed || !state.connected || !state.enabled) {
+              state.stage = state.connected ? 1 : 0;
+              render();
+              status("Preview the current draft before checking an outcome.");
+              return;
+            }
+            checkpoint();
+            state.proof = true;
+            state.proofTime = new Date().toISOString();
+            latestChange = "Ran the sample outcome check.";
+            render();
+            say(
+              "The simulated outcome is complete. The live product would show the matched event or operation and timestamp here.",
+            );
+          };
+        if ($("remove-filter"))
+          $("remove-filter").onclick = () => {
+            change(
+              { country: "all", stage: 1 },
+              "Removed the country filter. Preview the selection again.",
+            );
+          };
+        if ($("handoff"))
+          $("handoff").onclick = () => {
+            $("handoff-status").textContent =
+              "Waiting for installation. The draft is preserved; copying instructions would not mark the SDK as installed.";
+            say(
+              "Installation is waiting on the developer. Continue here when ready, or use the SDK test website to exercise the events.",
+            );
+          };
+        if ($("explain-query"))
+          $("explain-query").onclick = () =>
+            say(
+              state.country === "all"
+                ? "The sample query selects contact identity and attributes, without a country filter. The LIMIT bounds the displayed rows, not a warehouse scan cost."
+                : "The query uses " +
+                    (state.countryField || "an unselected country field") +
+                    ". The US spellings come from this fixture. The real experience must inspect accessible schema and values instead of assuming a format.",
+            );
+        for (const key of [
+          "connection",
+          "site",
+          "host",
+          "port",
+          "database",
+          "username",
+          "environment",
+          "framework",
+          "event",
+          "personId",
+          "spreadsheet",
+          "sheet",
+          "rowKey",
+          "country",
+          "countryField",
+          "frequency",
+          "idField",
+          "activeOnly",
+          "direction",
+          "object",
+          "operation",
+          "lastName",
+          "company",
+          "recordId",
+          "source",
+          "matchBy",
+          "matchValue",
+          "sampleEvent",
+          "lastNameMode",
+        ]) {
+          let el = $(key);
+          if (!el) continue;
+          el.onchange = () => {
+            let value = el.type === "checkbox" ? el.checked : el.value;
+            if (state[key] === value) return;
+            if (typeof value === "string" && sensitive(value)) {
+              el.value = state[key];
+              error(key, "Use a sample value without a password or secret.");
+              return;
+            }
+            let patch = { [key]: value };
+            if (key === "sampleEvent")
+              patch.matchValue = samples[value].properties.email;
+            if (
+              [
+                "site",
+                "host",
+                "port",
+                "database",
+                "username",
+                "environment",
+                "connection",
+                "direction",
+              ].includes(key)
+            )
+              patch.connected = false;
+            change(
+              patch,
+              "Updated " +
+                key.replace(/([A-Z])/g, " $1").toLowerCase() +
+                ". Any previous preview needs another check.",
+            );
+          };
+        }
+      }
+      function choose(kind) {
+        change(
+          {
+            ...initial(),
+            kind,
+            ...(kind === "salesforce" ? { direction: "" } : {}),
+          },
+          "Selected " + names[kind] + ".",
+        );
+        say(hint());
+      }
+      function validURL(v) {
+        try {
+          return ["https:", "http:"].includes(new URL(v).protocol);
+        } catch {
+          return false;
+        }
+      }
+      function connect() {
+        let ok = true;
+        if (state.kind === "salesforce" && !state.direction) {
+          error(
+            "direction",
+            "Choose which outcome you want before authorizing access.",
+          );
+          ok = false;
+        }
+        if (state.kind === "postgres") {
+          for (let k of ["host", "database", "username"])
+            if (!state[k].trim()) {
+              error(k, "Enter the sample " + k + ".");
+              ok = false;
+            }
+          if (
+            !/^\d+$/.test(state.port) ||
+            Number(state.port) < 1 ||
+            Number(state.port) > 65535
+          ) {
+            error("port", "Enter a port from 1 to 65535.");
+            ok = false;
+          }
+          if (!/^[a-zA-Z0-9.-]+$/.test(state.host)) {
+            error("host", "Use a hostname such as db.example.test.");
+            ok = false;
+          }
+        }
+        if (state.kind === "sdk" && !validURL(state.site)) {
+          error(
+            "site",
+            "Enter a website URL beginning with https:// or http://.",
+          );
+          ok = false;
+        }
+        if (!ok) return;
+        checkpoint();
+        state.connected = true;
+        state.stage = 1;
+        clearEvidence();
+        latestChange = "Selected the sample connection. Nothing is enabled.";
+        render();
+        status("Sample connection selected. Review the data choices below.");
+      }
+      function preview() {
+        if (!state.connected) {
+          state.stage = 0;
+          render();
+          say(
+            "The connection details changed. Check the sample connection again before previewing data.",
+          );
+          return;
+        }
+        if (isRecords() && state.country !== "all" && !state.countryField) {
+          error(
+            "countryField",
+            "Choose Contact country or Mailing country to define this filter.",
+          );
+          return;
+        }
+        if (isSalesforceDestination()) {
+          if (!state.event.trim()) {
+            error(
+              "event",
+              "Choose the incoming event that should trigger this action.",
+            );
+            return;
+          }
+          if (state.lastNameMode === "fixed" && !state.lastName.trim()) {
+            error(
+              "lastName",
+              "Enter the fixed last name, or choose the event field.",
+            );
+            return;
+          }
+          if (
+            state.operation !== "Create" &&
+            state.matchBy === "recordId" &&
+            !/^[a-zA-Z0-9]{15}(?:[a-zA-Z0-9]{3})?$/.test(state.recordId)
+          ) {
+            error(
+              "recordId",
+              "Enter a 15- or 18-character Salesforce record ID.",
+            );
+            return;
+          }
+          if (
+            state.operation !== "Create" &&
+            state.matchBy === "email" &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.matchValue)
+          ) {
+            error("matchValue", "Enter the email to match in the sample CRM.");
+            return;
+          }
+          if (
+            state.object === "Lead" &&
+            (state.operation === "Create" ||
+              (state.operation === "Upsert" &&
+                matchingRecords().length === 0)) &&
+            !state.company.trim()
+          ) {
+            error("company", "Enter the company for a new lead.");
+            return;
+          }
+        }
+        if (state.kind === "sdk") {
+          if (!state.event.trim()) {
+            error("event", "Enter the action to track.");
+            return;
+          }
+          if (!state.personId.trim()) {
+            error("personId", "Choose a stable person identifier.");
+            return;
+          }
+        }
+        if (state.kind === "sheets") {
+          let s = state.spreadsheet.trim();
+          if (
+            !s ||
+            !(
+              /^[\w-]+$/.test(s) ||
+              /^https:\/\/docs\.google\.com\/spreadsheets\/d\/[\w-]+(?:\/|$)/.test(
+                s,
+              )
+            )
+          ) {
+            error("spreadsheet", "Use a Google Sheets URL or a document ID.");
+            return;
+          }
+          if (state.rowKey === "email")
+            say(
+              "Email can repeat across demo requests. This choice updates the existing email row; event_id preserves separate requests.",
+            );
+        }
+        state.previewed = true;
+        state.proof = false;
+        state.stage = 2;
+        latestChange = "Prepared a sample preview from the current draft.";
+        render();
+      }
+      function sensitive(text) {
+        return (
+          /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/.test(text) ||
+          /(?:password|passwd|pwd|secret|private[_ -]?key|api[_ -]?key|write[_ -]?key|token)\s*["']?\s*[:=]\s*["']?[^\s",}]+/i.test(
+            text,
+          ) ||
+          /\b[a-z][a-z0-9+.-]*:\/\/[^\s/"'<>={},]+:[^\s@"'<>={},]+@/i.test(
+            text,
+          ) ||
+          /\b(?:sk|sa)_[A-Za-z0-9_-]{8,}/.test(text)
+        );
+      }
+      function parseConfig(text) {
+        let obj;
+        try {
+          obj = JSON.parse(text);
+        } catch {
+          throw new Error(
+            "Use valid sample JSON, or describe the change in a sentence.",
+          );
+        }
+        if (!obj || Array.isArray(obj) || typeof obj !== "object")
+          throw new Error("Use a JSON object with named setup fields.");
+        let allowed = [
+          "integration",
+          "host",
+          "port",
+          "database",
+          "username",
+          "site",
+          "framework",
+          "event",
+          "personId",
+          "country",
+          "countryField",
+          "activeOnly",
+          "frequency",
+          "spreadsheet",
+          "sheet",
+          "rowKey",
+          "environment",
+          "direction",
+          "object",
+          "operation",
+          "lastName",
+          "company",
+          "recordId",
+          "source",
+          "matchBy",
+          "matchValue",
+          "sampleEvent",
+          "lastNameMode",
+        ];
+        let unknown = Object.keys(obj).filter((k) => !allowed.includes(k));
+        if (unknown.length)
+          throw new Error(
+            "Unrecognized fields: " +
+              unknown.join(", ") +
+              ". Supported fields: " +
+              allowed.join(", ") +
+              ".",
+          );
+        let patch = {};
+        if (obj.integration) {
+          let kind = {
+            javascript: "sdk",
+            website: "sdk",
+            sdk: "sdk",
+            postgresql: "postgres",
+            postgres: "postgres",
+            salesforce: "salesforce",
+            sheets: "sheets",
+            googlesheets: "sheets",
+          }[String(obj.integration).toLowerCase().replace(/\s/g, "")];
+          if (!kind)
+            throw new Error(
+              "Choose sdk, postgres, salesforce, or sheets as the integration.",
+            );
+          if (kind !== state.kind) patch = { ...initial(), kind };
+        }
+        if (!state.kind && !patch.kind)
+          throw new Error(
+            "Include integration so the sample fields go to the right connection.",
+          );
+        for (let [k, v] of Object.entries(obj)) {
+          if (k === "integration") continue;
+          if (k === "activeOnly") {
+            if (typeof v !== "boolean")
+              throw new Error("Use true or false for activeOnly.");
+          } else if (!["string", "number"].includes(typeof v))
+            throw new Error("Use text for " + k + ".");
+          patch[k] = k === "activeOnly" ? v : String(v);
+        }
+        if (
+          "sampleEvent" in patch &&
+          !("matchValue" in obj) &&
+          samples[patch.sampleEvent]
+        )
+          patch.matchValue = samples[patch.sampleEvent].properties.email;
+        let enums = {
+          framework: ["JavaScript", "React", "Next.js"],
+          country: ["all", "us", "ca", "empty"],
+          countryField: ["country", "mailing_country", ""],
+          frequency: ["Manual", "Hourly", "Daily"],
+          rowKey: ["event_id", "email"],
+          environment: ["Sandbox", "Production"],
+          direction: ["", "in", "out"],
+          object: ["Lead", "Contact"],
+          operation: ["Create", "Update", "Upsert"],
+          matchBy: ["email", "recordId"],
+          sampleEvent: ["existing", "new", "ambiguous"],
+          lastNameMode: ["event", "fixed"],
+          source: ["Website · Research", "Backend · Research"],
+        };
+        for (let [k, vals] of Object.entries(enums))
+          if (k in patch && !vals.includes(patch[k]))
+            throw new Error(
+              "Use one of " + vals.join(", ") + " for " + k + ".",
+            );
+        if (
+          "port" in patch &&
+          (!/^\d+$/.test(patch.port) || +patch.port < 1 || +patch.port > 65535)
+        )
+          throw new Error("Use a port from 1 to 65535.");
+        if (
+          [
+            "host",
+            "port",
+            "database",
+            "username",
+            "environment",
+            "direction",
+          ].some((k) => k in patch)
+        ) {
+          patch.connected = false;
+          if ((patch.kind || state.kind) === "postgres")
+            patch.connection = "new";
+        }
+        return patch;
+      }
+      function request(text) {
+        text = text.trim();
+        if (!text) return;
+        $("request-error").textContent = "";
+        if (sensitive(text)) {
+          $("request").value = "";
+          $("request-error").textContent =
+            "This text appears to include a secret. It was not added to the conversation or saved. Use sample values here, and enter real credentials only in Customer.io.";
+          return;
+        }
+        let patch = {},
+          answer = "",
+          description = "Updated the draft from your request.";
+        try {
+          if (text.startsWith("{")) {
+            patch = parseConfig(text);
+            answer =
+              "Applied the supported JSON fields to the same draft. Review the visible values before checking the connection.";
+          } else {
+            let next = /postgres|\bsql\b|database/i.test(text)
+              ? "postgres"
+              : /salesforce/i.test(text)
+                ? "salesforce"
+                : /google sheets|spreadsheet/i.test(text)
+                  ? "sheets"
+                  : /website|javascript|\bsdk\b|react|next\.js/i.test(text)
+                    ? "sdk"
+                    : state.kind;
+            if (!next) {
+              $("request-error").textContent =
+                "Choose a sample integration: website SDK, PostgreSQL, Salesforce, or Google Sheets.";
+              return;
+            }
+            if (next !== state.kind) patch = { ...initial(), kind: next };
+            let effective = next;
+            if (
+              next === "salesforce" &&
+              /to salesforce|send|upsert|update|lead|contact|match/i.test(text)
+            ) {
+              if (/upsert|create or update|update or create/i.test(text))
+                patch.operation = "Upsert";
+              else if (/update existing|only update/i.test(text))
+                patch.operation = "Update";
+              else if (/create new|new leads/i.test(text))
+                patch.operation = "Create";
+              if (/\bleads?\b/i.test(text)) patch.object = "Lead";
+              if (/\bcontacts?\b/i.test(text)) patch.object = "Contact";
+              if (/match.*email|by email/i.test(text)) patch.matchBy = "email";
+              const email = text.match(
+                /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/,
+              );
+              if (email) patch.matchValue = email[0];
+            }
+
+            let understood =
+              next !== state.kind || Object.keys(patch).length > 0;
+            if (next === "salesforce") {
+              if (
+                /(?:send|push|create|update).*salesforce|to salesforce/i.test(
+                  text,
+                )
+              ) {
+                patch.direction = "out";
+                understood = true;
+              } else if (
+                /from salesforce|bring.*contacts|import.*salesforce/i.test(text)
+              ) {
+                patch.direction = "in";
+                understood = true;
+              }
+            }
+            if (/united states|\busa?\b/i.test(text)) {
+              patch.country = "us";
+              understood = true;
+            }
+            if (/canad/i.test(text)) {
+              patch.country = "ca";
+              understood = true;
+            }
+            if (
+              /all (countries|contacts)|remove.*(country|filter)/i.test(text)
+            ) {
+              patch.country = "all";
+              understood = true;
+            }
+            if (/mailing country|mailing_country/i.test(text)) {
+              patch.countryField = "mailing_country";
+              understood = true;
+            } else if (/contact country|country field/i.test(text)) {
+              patch.countryField = "country";
+              understood = true;
+            }
+            if (/active (contacts|only)|only active/i.test(text)) {
+              patch.activeOnly = true;
+              understood = true;
+            }
+            if (/hourly|every hour/i.test(text)) {
+              patch.frequency = "Hourly";
+              understood = true;
+            }
+            if (/daily|every day/i.test(text)) {
+              patch.frequency = "Daily";
+              understood = true;
+            }
+            if (/manual/i.test(text)) {
+              patch.frequency = "Manual";
+              understood = true;
+            }
+            if (/next\.js/i.test(text)) {
+              patch.framework = "Next.js";
+              understood = true;
+            } else if (/react/i.test(text)) {
+              patch.framework = "React";
+              understood = true;
+            }
+            let ev = text.match(
+              /(?:event(?: name)?|track)\s+["“]([^"”]{1,80})["”]/i,
+            );
+            if (ev) {
+              patch.event = ev[1];
+              understood = true;
+            }
+            let db = text.match(
+              /database(?: name)?\s*(?:is|=|:)\s*["']?([a-zA-Z0-9_-]+)/i,
+            );
+            if (db) {
+              patch.database = db[1];
+              patch.connected = false;
+              patch.connection = "new";
+              understood = true;
+            }
+            let host = text.match(/host\s*(?:is|=|:)\s*["']?([a-zA-Z0-9.-]+)/i);
+            if (host) {
+              patch.host = host[1];
+              patch.connected = false;
+              patch.connection = "new";
+              understood = true;
+            }
+            if (!understood) {
+              $("request-error").textContent =
+                "This guided prototype supports integration choice, country filters, active contacts, framework, event names in quotes, and sync cadence. Use the form for other changes.";
+              return;
+            }
+            answer =
+              effective === "salesforce" &&
+              !(patch.direction || state.direction)
+                ? "Salesforce can bring contacts into Customer.io or receive records from Customer.io. Choose the outcome below before authorizing access."
+                : effective === "postgres" ||
+                    (effective === "salesforce" &&
+                      (patch.direction || state.direction) !== "out")
+                  ? (patch.country || state.country) !== "all" &&
+                    !(patch.countryField || state.countryField)
+                    ? "I kept the country intent. The sample has Contact country and Mailing country; choose one before previewing."
+                    : "Updated the selection and query together. The previous preview and outcome must be checked again."
+                  : "Updated the visible setup choices. Continue with the current tool below.";
+          }
+          messages.push({ who: "You", text });
+          change(patch, description);
+          $("request").value = "";
+          say(answer);
+        } catch (e) {
+          $("request-error").textContent = e.message;
+        }
+      }
+      $("sample-json").onclick = () => {
+        const config = isSalesforceDestination()
+          ? {
+              integration: "salesforce",
+              direction: "out",
+              object: "Contact",
+              operation: "Upsert",
+              matchBy: "email",
+              sampleEvent: "existing",
+              event: "Demo Requested",
+            }
+          : state.kind === "sdk"
+            ? {
+                integration: "sdk",
+                site: "https://example.test",
+                framework: "React",
+                event: "Demo Requested",
+              }
+            : state.kind === "sheets"
+              ? {
+                  integration: "sheets",
+                  sheet: "Demo requests",
+                  rowKey: "event_id",
+                }
+              : {
+                  integration: "postgres",
+                  host: "db.example.test",
+                  port: 5432,
+                  database: "people",
+                  username: "readonly",
+                  country: "us",
+                  countryField: "country",
+                };
+        $("request").value = JSON.stringify(config, null, 2);
+        $("request").rows = 6;
+        $("request").focus();
+        status(
+          "Sample JSON is ready to edit. Send request applies it to the visible draft.",
+        );
+      };
+      $("toggle-thread").onclick = () => {
+        let open = $("thread").hidden;
+        $("thread").hidden = !open;
+        $("toggle-thread").textContent = open
+          ? "Hide conversation"
+          : "View conversation";
+        $("toggle-thread").setAttribute("aria-expanded", String(open));
+      };
+      $("conversation-form").onsubmit = (e) => {
+        e.preventDefault();
+        request($("request").value);
+      };
+      document
+        .querySelectorAll("[data-prompt]")
+        .forEach((b) => (b.onclick = () => request(b.dataset.prompt)));
+      $("request").onkeydown = (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          request($("request").value);
+        }
+      };
+      $("undo").onclick = () => {
+        if (!history.length) return;
+        state = history.pop();
+        clearEvidence();
+        latestChange =
+          "Restored the previous draft. Preview and outcome need another check.";
+        if (state.stage > 1) state.stage = 1;
+        render();
+        status(latestChange);
+      };
+      function safeDraft() {
+        let d = structuredClone(state);
+        d.tested = false;
+        d.enabled = false;
+        d.proof = false;
+        d.proofTime = "";
+        d.previewed = false;
+        d.connected = false;
+        d.stage = 0;
+        d.savedAt = new Date().toISOString();
+        return d;
+      }
+      $("save-draft").onclick = () => {
+        try {
+          localStorage.setItem(STORAGE, JSON.stringify(safeDraft()));
+          status(
+            "Draft saved in this browser. Credentials and conversation are excluded. Connection access will be checked again when resumed.",
+          );
+        } catch {
+          status(
+            "The draft could not be saved in this browser. Keep this tab open to retain it.",
+          );
+        }
+      };
+      function discard() {
+        try {
+          localStorage.removeItem(STORAGE);
+        } catch {}
+        savedDraft = null;
+        $("resume").hidden = true;
+      }
+      $("reset").onclick = () => {
+        state = initial();
+        history = [];
+        messages = [];
+        latestChange = "";
+        discard();
+        render();
+        status("Started a fresh research draft.");
+      };
+      $("dismiss-resume").onclick = () => {
+        discard();
+        status("Saved research draft discarded.");
+      };
+      $("restore").onclick = () => {
+        if (!savedDraft) return;
+        state = {
+          ...initial(),
+          ...savedDraft,
+          tested: false,
+          enabled: false,
+          stage: 0,
+          connected: false,
+          previewed: false,
+          proof: false,
+          proofTime: "",
+        };
+        $("resume").hidden = true;
+        history = [];
+        messages = [];
+        render();
+        say(
+          "Your setup choices are back. Check connection access again, then continue to the saved data choices.",
+        );
+        status("Draft resumed. Sample connection access needs another check.");
+      };
+      try {
+        let raw = localStorage.getItem(STORAGE);
+        if (raw) {
+          let d = JSON.parse(raw),
+            keys = Object.keys(initial());
+          if (
+            d &&
+            typeof d === "object" &&
+            !Array.isArray(d) &&
+            Object.keys(d).every((k) => keys.includes(k)) &&
+            Object.keys(names).includes(d.kind) &&
+            !sensitive(raw)
+          ) {
+            savedDraft = d;
+            $("resume").hidden = false;
+          }
+        }
+      } catch {}
+      render();
+    </script>
+  </body>
+</html>
